@@ -45,24 +45,24 @@ html,body{
 .row{display:flex;gap:10px;}
 .row .btn{flex:1;font-size:16px;padding:15px 10px;}
 .slot-wrap{display:flex;gap:10px;align-items:stretch;}
-.btn-slot{background:var(--bg3);border:1.5px solid var(--bg4);text-align:left;justify-content:space-between;min-height:88px;padding:16px 18px;flex:1;}
-.slot-num{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:4px;}
+.btn-slot{background:#333840;border:1.5px solid #444950;text-align:left;justify-content:space-between;min-height:88px;padding:16px 18px;flex:1;}
+.slot-num{font-size:13px;font-family:'DM Mono',monospace;color:#ffffff;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:4px;font-weight:600;}
 .slot-name{font-size:21px;font-weight:700;color:#ffffff;}
 .slot-name.empty{color:var(--text3);font-weight:500;}
-.slot-total{font-size:13px;color:var(--text2);font-family:'DM Mono',monospace;margin-top:5px;letter-spacing:0.5px;}
+.slot-total{font-size:17px;color:#ffffff;font-family:'DM Mono',monospace;margin-top:7px;letter-spacing:0.5px;font-weight:600;}
 .slot-arr{color:var(--text3);font-size:22px;flex-shrink:0;margin-left:6px;}
 .prog{height:5px;border-radius:3px;background:var(--bg4);margin-top:9px;display:flex;overflow:hidden;}
 .prog-d{background:var(--dc);height:100%;}
 .prog-m{background:var(--mc);height:100%;}
 .prog-f{background:var(--fc);height:100%;}
-.del-btn{width:60px;flex-shrink:0;background:var(--reds);color:#c47a7a;border:1.5px solid var(--red);border-radius:var(--r);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform var(--ease),opacity var(--ease);}
+.del-btn{width:60px;flex-shrink:0;background:#7a1a1a;color:#ffffff;border:2px solid #cc3333;border-radius:var(--r);font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform var(--ease),opacity var(--ease);}
 .del-btn:active{transform:scale(0.94);opacity:.8;}
 .phase-row{background:var(--bg3);border-radius:var(--cr);border:1.5px solid var(--bg4);padding:20px;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:100px;}
 .phase-row.on-d{border-color:var(--db);background:#182d42;}
 .phase-row.on-m{border-color:var(--mb);background:#291a08;}
 .phase-row.on-f{border-color:var(--fb);background:#1c2b38;}
 .ph-left{display:flex;flex-direction:column;gap:5px;flex:1;}
-.ph-lbl{font-size:12px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1.3px;}
+.ph-lbl{font-size:15px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1.3px;font-weight:700;}
 .lbl-d{color:var(--dc);}.lbl-m{color:var(--mc);}.lbl-f{color:var(--fc);}
 .ph-time{font-size:30px;font-weight:700;font-family:'DM Mono',monospace;color:var(--text);letter-spacing:-.5px;}
 .on-d .ph-time{color:var(--dc);}.on-m .ph-time{color:var(--mc);}.on-f .ph-time{color:var(--fc);}
@@ -113,6 +113,10 @@ html,body{
 .foot-link:active{color:var(--text2);}
 .toast{position:fixed;bottom:36px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg4);color:var(--text);padding:13px 22px;border-radius:50px;font-size:15px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .24s,transform .24s;z-index:400;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.notes-wrap{background:var(--bg3);border-radius:var(--cr);border:1.5px solid var(--bg4);padding:16px 18px;}
+.notes-label{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:8px;}
+.notes-inp{width:100%;background:transparent;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.5;resize:none;min-height:70px;-webkit-appearance:none;}
+.notes-inp::placeholder{color:var(--text3);}
 .proj-title{font-size:23px;font-weight:700;color:var(--text);word-break:break-word;margin-bottom:2px;}
 
 /* ── SPLASH SCREEN ── */
@@ -197,7 +201,12 @@ html,body{
         <button class="tog" id="tog-f" onclick="toggleTimer('f')">▶</button>
       </div>
     </div>
-    <div style="height:20px"></div>
+    <div style="height:16px"></div>
+    <div class="notes-wrap">
+      <div class="notes-label">Notes</div>
+      <textarea class="notes-inp" id="notes-inp" placeholder="Job number, customer, materials..." oninput="saveNotes(this.value)"></textarea>
+    </div>
+    <div style="height:16px"></div>
     <button class="btn btn-complete" onclick="goScreen('s3')">⚑ &nbsp;MARK PROJECT AS COMPLETE</button>
   </div>
 </div>
@@ -366,6 +375,15 @@ function persist() {
 
 
 // =============================================================
+//  NOTES
+// =============================================================
+function saveNotes(val) {
+  if (APP.activeSlot === null) return;
+  APP.slots[APP.activeSlot].notes = val;
+  persist();
+}
+
+// =============================================================
 //  SCREEN NAVIGATION
 // =============================================================
 function goScreen(id) {
@@ -431,7 +449,7 @@ function renderDashboard() {
           '<div class="slot-num">Slot '+(i+1)+'</div>' +
           '<div class="slot-name empty">[Empty]</div>' +
         '</div>' +
-        '<div class="slot-arr">+</div>';
+        '<div class="slot-arr" style="color:#ffffff;font-size:32px;font-weight:300;">+</div>';
       btn2.onclick = (function(idx){ return function(){ promptName(idx); }; })(i);
       list.appendChild(btn2);
     }
@@ -452,7 +470,7 @@ function promptName(i) {
 function confirmName() {
   var name = document.getElementById('m-name-inp').value.trim();
   if (!name) return;
-  APP.slots[_pendingSlot] = { name: name, times: { d:0, m:0, f:0 } };
+  APP.slots[_pendingSlot] = { name: name, times: { d:0, m:0, f:0 }, notes: '' };
   persist();
   closeModal('m-name');
   renderDashboard();
@@ -466,6 +484,8 @@ function openProject(i) {
   APP.activeSlot = i;
   document.getElementById('s2-sub').textContent  = 'Slot '+(i+1);
   document.getElementById('s2-name').textContent = APP.slots[i].name;
+  var ni = document.getElementById('notes-inp');
+  if (ni) ni.value = APP.slots[i].notes || '';
   refreshWorkbench();
   goScreen('s2');
 }
