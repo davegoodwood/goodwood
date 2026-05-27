@@ -49,6 +49,12 @@ html,body{
 .slot-num{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:4px;}
 .slot-name{font-size:21px;font-weight:700;color:#ffffff;}
 .slot-name.empty{color:var(--text3);font-weight:500;}
+.slot-total{font-size:13px;color:var(--text2);font-family:'DM Mono',monospace;margin-top:5px;letter-spacing:0.5px;}
+.slot-cost{font-size:13px;color:#e8c060;font-family:'DM Mono',monospace;margin-top:2px;letter-spacing:0.5px;}
+.rate-bar{background:var(--bg3);border-radius:var(--cr);border:1px solid var(--bg4);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
+.rate-label{font-size:14px;color:var(--text2);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1px;}
+.rate-inp{background:var(--bg);border:1.5px solid var(--bg4);border-radius:10px;color:var(--text);font-family:'DM Mono',monospace;font-size:20px;padding:10px 14px;width:120px;text-align:right;outline:none;-webkit-appearance:none;}
+.rate-inp:focus{border-color:var(--dc);}
 .slot-arr{color:var(--text3);font-size:22px;flex-shrink:0;margin-left:6px;}
 .prog{height:5px;border-radius:3px;background:var(--bg4);margin-top:9px;display:flex;overflow:hidden;}
 .prog-d{background:var(--dc);height:100%;}
@@ -155,6 +161,10 @@ html,body{
     <h1>Dashboard</h1>
   </div>
   <div class="body">
+    <div class="rate-bar">
+      <div class="rate-label">£ Hourly Rate</div>
+      <input class="rate-inp" id="rate-inp" type="number" min="0" max="999" placeholder="0.00" onchange="setRate(this.value)" oninput="setRate(this.value)">
+    </div>
     <div class="stack" id="slot-list"></div>
     <button class="foot-link" style="margin-top:18px" onclick="goScreen('s4')">📁 View Archive / History</button>
     <button class="foot-link" onclick="openInfo()">ℹ Info / Credits</button>
@@ -311,6 +321,7 @@ var APP = {
   maxSlots:   10, // Pro edition — fixed at 10 slots
   slots:      [],    // null | {name, times:{d,m,f}}
   archive:    [],
+  hourlyRate: 0,   // set by user
   activeSlot: null,
   runSlot:    null,
   runPhase:   null,
@@ -341,8 +352,9 @@ function loadData() {
   if (raw) {
     try {
       var p = JSON.parse(raw);
-      APP.slots   = Array.isArray(p.slots)   ? p.slots   : [];
-      APP.archive = Array.isArray(p.archive)  ? p.archive : [];
+      APP.slots      = Array.isArray(p.slots)   ? p.slots   : [];
+      APP.archive    = Array.isArray(p.archive)  ? p.archive : [];
+      APP.hourlyRate = p.hourlyRate || 0;
     } catch(e) {}
   }
   // Ensure correct slot count
@@ -354,7 +366,7 @@ function loadData() {
 //  PERSIST — saves ONLY project data, NEVER touches unlock keys
 // =============================================================
 function persist() {
-  var data = JSON.stringify({ slots: APP.slots, archive: APP.archive });
+  var data = JSON.stringify({ slots: APP.slots, archive: APP.archive, hourlyRate: APP.hourlyRate });
   // Write to both — cookie is the reliable one on Safari home screen
   try { document.cookie = 'wtData=' + encodeURIComponent(data) + '; path=/; expires=' + new Date(Date.now()+315360000000).toUTCString(); } catch(e) {}
   try { window.localStorage.setItem('shopTrackerData', data); } catch(e) {}
@@ -363,6 +375,21 @@ function persist() {
 // =============================================================
 // =============================================================
 
+
+// =============================================================
+//  HOURLY RATE
+// =============================================================
+function setRate(val) {
+  APP.hourlyRate = parseFloat(val) || 0;
+  persist();
+  renderDashboard();
+}
+
+function calcCost(secs) {
+  var hours = secs / 3600;
+  var cost = hours * APP.hourlyRate;
+  return cost.toFixed(2);
+}
 
 // =============================================================
 //  SCREEN NAVIGATION
@@ -382,6 +409,8 @@ function goScreen(id) {
 function renderDashboard() {
   var list = document.getElementById('slot-list');
   list.innerHTML = '';
+  var rateInp = document.getElementById('rate-inp');
+  if (rateInp && APP.hourlyRate > 0) rateInp.value = APP.hourlyRate;
 
   APP.slots.forEach(function(slot, i) {
     if (slot) {
@@ -393,7 +422,8 @@ function renderDashboard() {
       btn.style.flex = '1';
 
       var isLive = (APP.runSlot === i);
-      var total = slot.times.d + slot.times.m + slot.times.f;
+      var totalSecs = slot.times.d + slot.times.m + slot.times.f;
+      var total = totalSecs;
       var bar = '';
       if (total > 0) {
         var pd = (slot.times.d / total * 100).toFixed(1);
@@ -409,6 +439,8 @@ function renderDashboard() {
           '<div class="slot-num">Slot '+(i+1)+(isLive?' &nbsp;▶':'')+' </div>' +
           '<div class="slot-name">'+esc(slot.name)+'</div>' +
           bar +
+          '<div class="slot-total">⏱ '+fmtHM(totalSecs)+'</div>' +
+          (APP.hourlyRate > 0 ? '<div class="slot-cost">£ '+calcCost(totalSecs)+'</div>' : '') +
         '</div>' +
         '<div class="slot-arr">›</div>';
       btn.onclick = (function(idx){ return function(){ openProject(idx); }; })(i);
