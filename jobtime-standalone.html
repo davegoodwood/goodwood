@@ -1,0 +1,3011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>JobTime</title>
+  <meta name="theme-color" content="#111111" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="JobTime" />
+  <link rel="icon" href="data:image/png;base64,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" />
+  <link rel="apple-touch-icon" sizes="192x192" href="data:image/png;base64,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" />
+  <link rel="apple-touch-icon" sizes="512x512" href="data:image/png;base64,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" />
+  <style>
+/* ==========================================================================
+   Job Tracker — Stylesheet
+   Spacing scale: 4, 8, 12, 16, 24, 32, 48
+   Colours: bg #111, surface #1a1a1a, card #222, text #fff/#aaa, accent #3b82f6
+   ========================================================================== */
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --color-bg: #111111;
+  --color-surface: #1a1a1a;
+  --color-card: #222222;
+  --color-text: #ffffff;
+  --color-text-secondary: #aaaaaa;
+  --color-accent: #3b82f6;
+  --color-border: #2e2e2e;
+  --color-danger: #ef4444;
+  --color-warning-muted: #f59e0b;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  --font-body: 14px;
+  --font-ui: 16px;
+  --font-section: 20px;
+  --font-title: 22px;
+  --font-page: 28px;
+
+  /* Shared reorder animation style: ease-out, slight slide + fade, no
+     bounce/overshoot. Two durations for two triggers:
+     - 160ms when a card auto-reorders because its time/cost overtook
+       another's (per-tick live update).
+     - 220-260ms when the user toggles the sort/display mode and the
+       whole list reorders at once. */
+  --reorder-duration: 160ms;
+  --reorder-duration-sort: 240ms;
+  --reorder-easing: ease-out;
+
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.page {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.page.active {
+  display: flex;
+}
+
+.page-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-4) var(--space-7);
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.page-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.page-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-bg);
+}
+
+.page-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
+}
+
+.page-job-detail .page-scroll {
+  padding-top: var(--space-4);
+}
+
+/* Header + actions card stick to the top of the scroll container while
+   the process list scrolls beneath. As a normal child of .page-scroll,
+   this wrapper always has the same content-box width as the Notes and
+   process cards below it. */
+.job-detail-sticky {
+  position: sticky;
+  top: calc(-1 * var(--space-4));
+  z-index: 2;
+  background-color: var(--color-bg);
+  padding-top: var(--space-4);
+  margin-top: calc(-1 * var(--space-4));
+}
+
+#page-dashboard .page-scroll {
+  padding-top: 0;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  flex-shrink: 0;
+}
+
+.page-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Dashboard header card — sits above .page-scroll, margins match the
+   horizontal inset used by cards inside .page-scroll */
+.dashboard-header {
+  flex-shrink: 0;
+}
+
+.dashboard-add-job-btn {
+  flex-shrink: 0;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-ui);
+  font-weight: 600;
+  min-height: 48px;
+  border-radius: var(--radius-md);
+}
+
+.dashboard-add-job-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Passive label showing the current global Display Mode (Time/Cost).
+   Smallest defined text size, secondary colour, no icon/border/background. */
+/* Passive indicator showing the current global Display Mode (Time/Cost)
+   as a small icon: a clock for Time, the active currency symbol for
+   Cost. Secondary colour, no border/background — a quiet label. */
+.display-mode-indicator {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: calc(-1 * var(--space-2));
+  margin-right: calc(-1 * var(--space-1));
+  color: var(--color-text-secondary);
+}
+
+.display-mode-icon {
+  display: none;
+  width: 18px;
+  height: 18px;
+}
+
+.display-mode-icon.is-active {
+  display: block;
+  animation: display-mode-icon-in 100ms ease-out;
+}
+
+@keyframes display-mode-icon-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.display-mode-currency {
+  font-size: var(--font-section);
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: var(--font-page);
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-subtitle {
+  font-size: var(--font-body);
+  color: var(--color-text-secondary);
+}
+
+.section-title {
+  font-size: var(--font-section);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+
+/* ==========================================================================
+   Job View header — flat, minimal bar (no card background). Job actions
+   sit directly beneath it. The view is a focused workspace: header and
+   actions stay put, only the process list scrolls beneath them.
+   ========================================================================== */
+
+.job-detail-header {
+  flex-shrink: 0;
+}
+
+.job-detail-title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-page);
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.job-detail-title.is-disabled {
+  cursor: default;
+}
+
+/* Inline edit input for the job name - same font, size, weight, and
+   alignment as the title it replaces, no layout shift. */
+.job-detail-title-input {
+  display: none;
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-page);
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: left;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  padding: 0 4px;
+  margin: 0 -4px;
+  outline: none;
+}
+
+.job-detail-title-input.is-active {
+  display: block;
+}
+
+
+/* Compact job total — present, but not large or dominant */
+.job-detail-total {
+  flex-shrink: 0;
+  text-align: right;
+  font-size: var(--font-ui);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.job-detail-total-label {
+  color: var(--color-text-secondary);
+}
+
+.job-detail-total-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Job actions card — sits in the fixed header area, between the header
+   and the scrollable content, styled like a process card */
+.job-detail-actions-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  height: 138px;
+}
+
+.job-detail-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Fills the remaining space below the button row, down to the card's
+   bottom edge, and centres the helper text within that space. */
+.job-detail-helper-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.job-detail-actions .btn {
+  flex: 0 0 auto;
+  padding: var(--space-3) 2px;
+  font-size: var(--font-ui);
+  font-weight: 600;
+  min-height: 48px;
+  border-radius: var(--radius-md);
+}
+
+/* "Sort" button between Add process and Archive job — switches the
+   global Display Mode (Time/Cost). Same height, border-radius, font-size,
+   and neutral border style as the surrounding buttons. Only the trailing
+   icon (clock for Time, currency symbol for Cost) changes — no
+   active/inactive states or colour changes. Compact width so the
+   3-button row still fits. */
+.job-detail-display-mode-btn {
+  flex: 0 0 auto;
+  padding: var(--space-3) 2px;
+}
+
+.job-detail-actions .job-detail-display-mode-btn {
+  gap: 2px;
+  padding: var(--space-3) var(--space-1);
+  border: 1px solid #22c55e;
+  background-color: #22c55e;
+  color: #ffffff;
+  transition: none;
+}
+
+.job-detail-actions .btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.job-detail-actions .job-detail-display-mode-btn svg.display-mode-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.job-detail-display-mode-btn .display-mode-currency {
+  line-height: 16px;
+  font-size: var(--font-ui);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-ui);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text);
+  padding: var(--space-3) var(--space-5);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-surface);
+  border-color: var(--color-accent);
+}
+
+.btn:active {
+  transform: scale(0.99);
+}
+
+/* Sort button: steady green like START, with the same slight hover
+   darkening. Focus/active states stay static (no extra colour change). */
+.job-detail-actions .job-detail-display-mode-btn:hover {
+  background-color: #1ea34e;
+  border-color: #1ea34e;
+  color: #ffffff;
+}
+
+.job-detail-actions .job-detail-display-mode-btn:focus,
+.job-detail-actions .job-detail-display-mode-btn:focus-visible,
+.job-detail-actions .job-detail-display-mode-btn:active {
+  background-color: #22c55e;
+  border-color: #22c55e;
+  color: #ffffff;
+  outline: none;
+  transform: none;
+}
+
+.btn-outline {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  background-color: transparent;
+}
+
+.btn-outline:hover {
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.btn-primary:hover {
+  background-color: #2f6fd1;
+  border-color: #2f6fd1;
+}
+
+.btn-danger {
+  border-color: var(--color-border);
+  color: var(--color-danger);
+}
+
+.btn-danger:hover {
+  background-color: rgba(239, 68, 68, 0.08);
+  border-color: var(--color-danger);
+}
+
+/* Add process — primary action, same accent fill used throughout the app */
+.job-detail-action-primary {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.job-detail-action-primary:hover {
+  background-color: #2f6fd1;
+  border-color: #2f6fd1;
+}
+
+/* Archive job — secondary action, uses the same yellow as the 3rd-place
+   process colour, with dark text for contrast */
+.job-detail-action-secondary {
+  background-color: var(--color-warning-muted);
+  border-color: var(--color-warning-muted);
+  color: #1a1206;
+}
+
+.job-detail-action-secondary:hover {
+  background-color: #d9890a;
+  border-color: #d9890a;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Big, workshop-friendly buttons: tall, large text, easy to tap */
+.btn-big {
+  width: 100%;
+  min-height: 56px;
+  font-size: var(--font-section);
+  font-weight: 600;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+}
+
+.btn-big svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Small explanatory text shown directly under a button */
+.helper-text {
+  font-size: var(--font-body);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-top: var(--space-2);
+  line-height: 1.5;
+}
+
+.job-detail-helper {
+  margin: 0 var(--space-4);
+  margin-top: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.back-button {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #2f6fd1;
+  border-color: #2f6fd1;
+}
+
+.back-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Header Card — reusable component matching the geometry of all other
+   cards (width, padding, radius, spacing tokens), used for page headers
+   that need title + supporting controls on one row. Content is
+   vertically centred. */
+.header-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 86px;
+}
+
+/* The actions card has no horizontal padding so .job-detail-actions can
+   distribute equal gaps (edges <-> buttons <-> buttons) across its full
+   width via space-evenly. */
+/* Cards that represent something (a job, a process) open it on tap */
+.card-tappable {
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.card-tappable:hover {
+  border-color: var(--color-accent);
+  background-color: rgba(59, 130, 246, 0.06);
+}
+
+.card-tappable:active {
+  transform: scale(0.99);
+}
+
+/* Dashboard job cards — same size as process cards below */
+#dashboard-content .card {
+  min-height: 138px;
+  display: flex;
+  flex-direction: column;
+}
+
+#dashboard-content .card .time-distribution-bar {
+  margin-top: auto;
+}
+
+/* Buttons inside a tappable card are actions, not part of the tap-to-open
+   area visually, but clicks on them are still handled before card taps. */
+.card-tappable .card-actions .btn,
+.card-tappable .process-toggle-btn {
+  cursor: pointer;
+}
+
+.card-title {
+  font-size: var(--font-title);
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-meta {
+  font-size: var(--font-body);
+  color: var(--color-text-secondary);
+}
+
+.card-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.card-actions .btn {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-body);
+}
+
+/* ==========================================================================
+   Empty state
+   ========================================================================== */
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.empty-state-text {
+  font-size: var(--font-body);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Bottom navigation
+   ========================================================================== */
+
+.bottom-nav {
+  flex-shrink: 0;
+  display: flex;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-2) max(var(--space-2), env(safe-area-inset-bottom));
+}
+
+/* The Job View is a focused, full-height workspace — no bottom nav. */
+#app:has(#page-job-detail.active) .bottom-nav {
+  display: none;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s ease;
+}
+
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+}
+
+.nav-item.active {
+  color: var(--color-accent);
+}
+
+/* ==========================================================================
+   Card section titles (NOTES, TOTAL) and fields rows
+   ========================================================================== */
+
+.card-section-title {
+  font-size: var(--font-ui);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.card-fields-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.card-field {
+  font-size: var(--font-ui);
+  font-weight: 600;
+}
+
+.card-field-label {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Manual time edit: a small "Edit" button sits next to the Time value.
+   On tap, the value+button are hidden and replaced with inline
+   minute/second inputs in the same row — card height never changes. */
+.card-field-time {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.time-edit-btn {
+  flex-shrink: 0;
+  font-family: var(--font-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  margin-left: 2px;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.time-edit-btn:hover {
+  color: var(--color-text);
+  border-color: var(--color-text-secondary);
+}
+
+.time-edit-btn.is-disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.time-edit-inputs {
+  display: none;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.time-edit-inputs.is-active {
+  display: inline-flex;
+}
+
+/* When editing, hide the static value + Edit button so the inputs take
+   their place without changing the row's height or layout. */
+.card-field-time.is-editing .process-instance-timer,
+.card-field-time.is-editing .time-edit-btn {
+  display: none;
+}
+
+.time-edit-input {
+  width: 2.5em;
+  font-family: var(--font-family);
+  font-size: var(--font-ui);
+  font-weight: 600;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  padding: 0 2px;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.time-edit-input::-webkit-outer-spin-button,
+.time-edit-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.time-edit-unit {
+  font-size: var(--font-body);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Time-distribution bar — a static summary of how a job's total time is
+   divided across its processes. Sits beneath all other card content and
+   spans the full width of the card. */
+.time-distribution-bar {
+  display: flex;
+  width: calc(100% + var(--space-4) * 2);
+  height: 6px;
+  margin: var(--space-4) calc(var(--space-4) * -1) calc(var(--space-4) * -1);
+  overflow: hidden;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.time-distribution-segment {
+  height: 100%;
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 56px;
+  max-height: 200px;
+  resize: vertical;
+  font-family: var(--font-family);
+  font-size: var(--font-body);
+  font-weight: 500;
+  color: var(--color-text);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  outline: none;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   Process cards (Job Detail)
+   ========================================================================== */
+
+.process-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+/* Process cards carry a strong left-edge accent in the process's colour,
+   matching the same colour used for that process in the dashboard's
+   time-distribution bar. */
+.process-color-card {
+  position: relative;
+  border-left: 4px solid;
+  padding-left: calc(var(--space-4) - 4px);
+}
+
+/* Dead zone: a vertical strip down the middle of the card, between the
+   left-side content (name, Time, Type) and right-side content
+   (Start/Stop, Cost, Rate). Taps here are absorbed and do nothing -
+   they don't open the Edit Process modal. Purely a tap target; no
+   visual change, no effect on layout or card size. */
+.process-card-deadzone {
+  position: absolute;
+  top: var(--space-3);
+  bottom: var(--space-3);
+  left: 50%;
+  width: var(--space-3);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Non-interactive buffer zone around each card's outer perimeter.
+   Purely a visual/structural safe-zone marker for scroll-safety -
+   pointer-events: none means it never captures taps or interferes
+   with any element, inside the card or in adjacent cards. Does not
+   affect card size or spacing (card margins are unchanged). */
+.process-color-card::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  bottom: -8px;
+  left: -8px;
+  pointer-events: none;
+}
+
+/* FLIP-style reorder animation: a card that has moved position is given
+   an inline transform/opacity representing its old position (set by JS),
+   then this class transitions it back to its natural position with a
+   slight slide + fade. Short, ease-out, no bounce/overshoot. */
+.process-color-card.is-reordering {
+  transition: transform var(--reorder-duration) var(--reorder-easing),
+    opacity var(--reorder-duration) var(--reorder-easing);
+}
+
+/* Sort/display-mode toggle: same style, slightly longer duration since
+   the whole list reorders at once. */
+.process-color-card.is-reordering-sort {
+  transition: transform var(--reorder-duration-sort) var(--reorder-easing),
+    opacity var(--reorder-duration-sort) var(--reorder-easing);
+}
+
+.process-instance-name-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+/* A clearly visible colour swatch next to the process name — same colour
+   as this process's segment in the dashboard time-distribution bar. */
+.process-color-swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+}
+
+.process-instance-name {
+  font-size: var(--font-section);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Large, obvious Start/Stop button — never shrunk */
+.process-toggle-btn {
+  flex-shrink: 0;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: 110px;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: none;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: var(--font-ui);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* Invisible tap-target padding: extends the clickable area around
+   Start/Stop without changing its visual size or the surrounding
+   layout, reducing accidental mis-taps. */
+.process-toggle-btn::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  bottom: -24px;
+  left: -24px;
+}
+
+.process-toggle-btn.is-stopped {
+  background-color: #22c55e;
+}
+
+.process-toggle-btn.is-stopped:hover {
+  background-color: #1ea34e;
+}
+
+.process-toggle-btn.is-running {
+  background-color: var(--color-danger);
+}
+
+.process-toggle-btn.is-running:hover {
+  background-color: #d63d3d;
+}
+
+.process-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.process-instance-timer {
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.process-instance-cost {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--font-body);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.form-input {
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-ui);
+  font-weight: 500;
+  color: var(--color-text);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.form-input:focus {
+  border-color: var(--color-accent);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aaaaaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  padding-right: var(--space-6);
+}
+
+.input-with-prefix {
+  position: relative;
+}
+
+.input-with-prefix .form-input {
+  padding-left: var(--space-6);
+}
+
+.input-prefix {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  font-size: var(--font-ui);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.type-toggle {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.type-toggle-btn {
+  flex: 1;
+  text-align: center;
+  padding: var(--space-3) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: var(--font-body);
+  cursor: pointer;
+}
+
+.type-toggle-btn.active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+/* ==========================================================================
+   Modal
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 100;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 360px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--space-5);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.modal-title {
+  font-size: var(--font-section);
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+  background-color: var(--color-card);
+}
+
+.modal-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.modal-actions {
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.modal-subtext {
+  font-size: var(--font-body);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.modal-actions-row {
+  flex-direction: row;
+}
+
+.modal-actions-row .btn {
+  flex: 1;
+}
+
+</style>
+</head>
+<body>
+  <div id="app">
+
+    <!-- ================================================================
+         SCREEN 1 — DASHBOARD
+         ================================================================ -->
+    <section id="page-dashboard" class="page active">
+      <div class="page-scroll">
+        <div class="job-detail-sticky">
+          <div class="card header-card dashboard-header">
+            <div class="page-header-text">
+              <div class="page-title">Dashboard</div>
+              <div class="page-subtitle" id="job-count-label">0 jobs</div>
+            </div>
+            <div class="display-mode-indicator" id="display-mode-label" aria-label="Showing time">
+              <svg class="display-mode-icon" id="display-mode-icon-time" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <polyline points="12 7 12 12 15 14"></polyline>
+              </svg>
+              <span class="display-mode-icon display-mode-currency" id="display-mode-icon-cost"></span>
+            </div>
+            <button class="btn btn-primary dashboard-add-job-btn" id="open-add-job">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add job
+            </button>
+          </div>
+        </div>
+
+        <div id="dashboard-content"></div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SCREEN 2 — JOB DETAIL
+         ================================================================ -->
+    <section id="page-job-detail" class="page page-job-detail">
+      <div class="page-scroll">
+        <div class="job-detail-sticky">
+          <div class="card header-card job-detail-header">
+            <button class="back-button" id="back-to-dashboard">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </button>
+            <div class="job-detail-title" id="job-detail-title">Job</div>
+            <input class="job-detail-title-input" id="job-detail-title-input" type="text" maxlength="80" />
+            <div class="job-detail-total">
+              <span class="job-detail-total-label">Total: </span>
+              <span class="job-detail-total-value" id="job-total-value">£0.00</span>
+            </div>
+          </div>
+
+          <div class="card job-detail-actions-card">
+            <div class="job-detail-actions">
+              <button class="btn btn-primary job-detail-action-primary" id="open-add-process">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add process
+              </button>
+
+              <button class="btn job-detail-display-mode-btn" id="job-display-mode-toggle" type="button" aria-label="Toggle display mode">
+                Sort
+                <svg class="display-mode-icon" id="job-display-mode-icon-time" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <polyline points="12 7 12 12 15 14"></polyline>
+                </svg>
+                <span class="display-mode-icon display-mode-currency" id="job-display-mode-icon-cost"></span>
+              </button>
+
+              <button class="btn job-detail-action-secondary" id="open-archive-job">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="4" rx="1"></rect>
+                  <path d="M5 8v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8"></path>
+                  <line x1="10" y1="12" x2="14" y2="12"></line>
+                </svg>
+                Archive job
+              </button>
+            </div>
+            <div class="job-detail-helper-wrap">
+              <div class="helper-text job-detail-helper">Archiving keeps the job safe. You can restore it anytime.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-section-title">Notes</div>
+          <textarea class="notes-textarea" id="job-notes" placeholder="Add notes for this job…"></textarea>
+        </div>
+
+        <div class="section-title">Processes</div>
+        <div id="process-instance-list"></div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         UTILITY PANEL — SETTINGS
+         ================================================================ -->
+    <section id="page-settings" class="page">
+      <div class="page-header">
+        <div class="page-header-text">
+          <div class="page-title">Settings</div>
+          <div class="page-subtitle">Global configuration</div>
+        </div>
+      </div>
+
+      <div class="page-scroll">
+        <div class="section-title">Currency</div>
+        <div class="form-group">
+          <label class="form-label" for="global-currency">Global currency</label>
+          <select class="form-input form-select" id="global-currency">
+            <option value="GBP">£ GBP</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+          </select>
+        </div>
+
+        <div class="section-title" style="margin-top: var(--space-6);">Default rate</div>
+        <div class="form-group">
+          <label class="form-label" for="global-rate">Global default hourly rate</label>
+          <div class="input-with-prefix">
+            <span class="input-prefix" id="global-rate-symbol">£</span>
+            <input class="form-input" type="number" id="global-rate" placeholder="e.g. 45" min="0" step="0.01" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SCREEN — COMPLETED JOBS
+         ================================================================ -->
+    <section id="page-completed-jobs" class="page">
+      <div class="page-header">
+        <div class="page-header-text">
+          <div class="page-title">Completed Jobs</div>
+        </div>
+      </div>
+
+      <div class="page-scroll">
+        <div id="completed-jobs-content"></div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         BOTTOM NAV
+         ================================================================ -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        Dashboard
+      </button>
+      <button class="nav-item" data-page="completed-jobs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="4" rx="1"></rect>
+          <path d="M5 8v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8"></path>
+          <line x1="10" y1="12" x2="14" y2="12"></line>
+        </svg>
+        Completed Jobs
+      </button>
+      <button class="nav-item" data-page="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        Settings
+      </button>
+    </nav>
+  </div>
+
+  <!-- ================================================================
+       MODAL — ADD JOB
+       ================================================================ -->
+  <div class="modal-overlay" id="add-job-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Add job</div>
+        <button class="modal-close" data-close-modal="add-job-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="add-job-form">
+        <div class="form-group">
+          <label class="form-label" for="new-job-name">Job name</label>
+          <input class="form-input" type="text" id="new-job-name" placeholder="e.g. Kitchen rewiring" required autocomplete="off" />
+        </div>
+        <div class="modal-actions">
+          <button type="submit" id="add-job-submit" class="btn btn-primary btn-big">Add job</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL — ADD PROCESS (created directly inside the job)
+       ================================================================ -->
+  <div class="modal-overlay" id="add-process-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Add process</div>
+        <button class="modal-close" data-close-modal="add-process-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="add-process-form">
+        <div class="form-group">
+          <label class="form-label" for="new-process-name">Process name</label>
+          <input class="form-input" type="text" id="new-process-name" placeholder="e.g. Cutting" required autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Type</label>
+          <div class="type-toggle" id="new-process-type-toggle">
+            <button type="button" class="type-toggle-btn active" data-type="hourly">Hourly</button>
+            <button type="button" class="type-toggle-btn" data-type="flat">Flat</button>
+          </div>
+        </div>
+
+        <div class="form-group" id="new-process-rate-group">
+          <label class="form-label" for="new-process-rate">Hourly rate (optional)</label>
+          <div class="input-with-prefix">
+            <span class="input-prefix" id="new-process-currency-symbol">£</span>
+            <input class="form-input" type="number" id="new-process-rate" placeholder="Use global rate" min="0" step="0.01" />
+          </div>
+        </div>
+
+        <div class="form-group" id="new-process-cost-group" style="display: none;">
+          <label class="form-label" for="new-process-cost">Cost</label>
+          <div class="input-with-prefix">
+            <span class="input-prefix" id="new-process-cost-currency-symbol">£</span>
+            <input class="form-input" type="number" id="new-process-cost" placeholder="e.g. 50" min="0" step="0.01" />
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" id="add-process-submit" class="btn btn-primary btn-big">Add process</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL — EDIT PROCESS (tap a process card to open this)
+       ================================================================ -->
+  <div class="modal-overlay" id="edit-process-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Edit process</div>
+        <button class="modal-close" data-close-modal="edit-process-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="edit-process-form">
+        <input type="hidden" id="edit-process-id" value="" />
+
+        <div class="form-group">
+          <label class="form-label" for="edit-process-name">Process name</label>
+          <input class="form-input" type="text" id="edit-process-name" required autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Type</label>
+          <div class="type-toggle" id="edit-process-type-toggle">
+            <button type="button" class="type-toggle-btn active" data-type="hourly">Hourly</button>
+            <button type="button" class="type-toggle-btn" data-type="flat">Flat</button>
+          </div>
+        </div>
+
+        <div class="form-group" id="edit-process-rate-group">
+          <label class="form-label" for="edit-process-rate">Hourly rate (optional)</label>
+          <div class="input-with-prefix">
+            <span class="input-prefix" id="edit-process-currency-symbol">£</span>
+            <input class="form-input" type="number" id="edit-process-rate" placeholder="Use global rate" min="0" step="0.01" />
+          </div>
+        </div>
+
+        <div class="form-group" id="edit-process-cost-group" style="display: none;">
+          <label class="form-label" for="edit-process-cost">Cost</label>
+          <div class="input-with-prefix">
+            <span class="input-prefix" id="edit-process-cost-currency-symbol">£</span>
+            <input class="form-input" type="number" id="edit-process-cost" placeholder="e.g. 50" min="0" step="0.01" />
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" id="edit-process-submit" class="btn btn-primary btn-big">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL — ARCHIVE JOB CONFIRMATION
+       ================================================================ -->
+  <div class="modal-overlay" id="archive-confirm-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Archive this job?</div>
+        <button class="modal-close" data-close-modal="archive-confirm-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-subtext">You can restore it later from Completed Jobs.</div>
+
+      <div class="modal-actions modal-actions-row">
+        <button type="button" class="btn btn-outline btn-big" data-close-modal="archive-confirm-overlay">Cancel</button>
+        <button type="button" class="btn btn-primary btn-big" id="confirm-archive-job">Archive job</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MODAL — DELETE JOB CONFIRMATION
+       ================================================================ -->
+  <div class="modal-overlay" id="delete-confirm-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Delete this job?</div>
+        <button class="modal-close" data-close-modal="delete-confirm-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-subtext">This cannot be undone. The job and all its data will be permanently removed.</div>
+
+      <div class="modal-actions modal-actions-row">
+        <button type="button" class="btn btn-outline btn-big" data-close-modal="delete-confirm-overlay">Cancel</button>
+        <button type="button" class="btn btn-danger btn-big" id="confirm-delete-job">Delete job</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+/* ==========================================================================
+   Job Tracker — App Logic
+   ========================================================================== */
+
+const STORAGE_JOBS = 'jobs';
+const STORAGE_ARCHIVED = 'archivedJobs';
+const STORAGE_SETTINGS = 'settings';
+
+const CURRENCY_SYMBOLS = {
+  GBP: '£',
+  USD: '$',
+  EUR: '€',
+};
+
+const DEFAULT_SETTINGS = {
+  currency: 'GBP',
+  rate: 0,
+  displayMode: 'time',
+};
+
+// Colours assigned by rank of elapsed time within a job — not fixed per
+// process. The process with the most elapsed time is always blue, the
+// second-most is always green, the third-most is always amber. Any
+// remaining processes (rank 4+) share the neutral "Other" grey. As elapsed
+// times change, which process holds each colour can change too.
+const RANK_COLORS = [
+  '#3b82f6', // 1st largest — blue
+  '#22c55e', // 2nd largest — green
+  '#f59e0b', // 3rd largest — amber
+];
+
+// Neutral grey used for the "Other" segment of the time-distribution bar,
+// and for any process ranked 4th or lower.
+const OTHER_SEGMENT_COLOR = '#5a5a5a';
+
+// ---------------------------------------------------------------------------
+// Storage layer
+//
+// Uses real localStorage when available (required for the deployed PWA so
+// data survives reloads). Falls back to an in-memory object if localStorage
+// throws, e.g. inside a sandboxed preview.
+// ---------------------------------------------------------------------------
+
+const memoryStorage = {};
+
+const storage = {
+  getItem(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      return Object.prototype.hasOwnProperty.call(memoryStorage, key) ? memoryStorage[key] : null;
+    }
+  },
+  setItem(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {
+      memoryStorage[key] = value;
+    }
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Data access
+// ---------------------------------------------------------------------------
+
+function normalizeInstance(instance) {
+  const type = instance.type === 'flat' ? 'flat' : 'hourly';
+  return {
+    id: instance.id || generateId('instance'),
+    name: typeof instance.name === 'string' ? instance.name : 'Process',
+    type: type,
+    // Hourly: rate is optional — null/undefined means "use global rate".
+    rate: type === 'hourly' && typeof instance.rate === 'number' && !isNaN(instance.rate) ? instance.rate : null,
+    // Flat: cost is the fixed amount and IS the cost.
+    cost: type === 'flat' && typeof instance.cost === 'number' && !isNaN(instance.cost) ? instance.cost : 0,
+    accumulatedSeconds:
+      typeof instance.accumulatedSeconds === 'number' && !isNaN(instance.accumulatedSeconds)
+        ? instance.accumulatedSeconds
+        : 0,
+    status: instance.status === 'running' ? 'running' : 'stopped',
+    lastStart: typeof instance.lastStart === 'number' ? instance.lastStart : null,
+  };
+}
+
+function normalizeJob(job) {
+  const normalized = {
+    id: job.id || generateId('job'),
+    name: typeof job.name === 'string' ? job.name : 'Untitled job',
+    createdAt: typeof job.createdAt === 'number' ? job.createdAt : Date.now(),
+    notes: typeof job.notes === 'string' ? job.notes : '',
+    processes: Array.isArray(job.processes) ? job.processes.map((p) => normalizeInstance(p)) : [],
+  };
+  if (typeof job.archivedAt === 'number') {
+    normalized.archivedAt = job.archivedAt;
+  }
+  return normalized;
+}
+
+function loadJobs() {
+  try {
+    const raw = storage.getItem(STORAGE_JOBS);
+    const parsed = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map(normalizeJob);
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveJobs(jobs) {
+  storage.setItem(STORAGE_JOBS, JSON.stringify(jobs));
+}
+
+function loadArchivedJobs() {
+  try {
+    const raw = storage.getItem(STORAGE_ARCHIVED);
+    const parsed = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map((job) => {
+      const normalized = normalizeJob(job);
+      if (typeof normalized.archivedAt !== 'number') {
+        normalized.archivedAt = Date.now();
+      }
+      return normalized;
+    });
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveArchivedJobs(jobs) {
+  storage.setItem(STORAGE_ARCHIVED, JSON.stringify(jobs));
+}
+
+function loadSettings() {
+  try {
+    const raw = storage.getItem(STORAGE_SETTINGS);
+    if (!raw) return { ...DEFAULT_SETTINGS };
+    const parsed = JSON.parse(raw);
+    return {
+      currency: CURRENCY_SYMBOLS[parsed.currency] ? parsed.currency : DEFAULT_SETTINGS.currency,
+      rate: typeof parsed.rate === 'number' && !isNaN(parsed.rate) ? parsed.rate : DEFAULT_SETTINGS.rate,
+      displayMode: parsed.displayMode === 'cost' || parsed.displayMode === 'time' ? parsed.displayMode : DEFAULT_SETTINGS.displayMode,
+    };
+  } catch (e) {
+    return { ...DEFAULT_SETTINGS };
+  }
+}
+
+function saveSettings(settings) {
+  storage.setItem(STORAGE_SETTINGS, JSON.stringify(settings));
+}
+
+// ---------------------------------------------------------------------------
+// IDs
+// ---------------------------------------------------------------------------
+
+function generateId(prefix) {
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+// ---------------------------------------------------------------------------
+// Formatting helpers
+// ---------------------------------------------------------------------------
+
+function getCurrencySymbol() {
+  const settings = loadSettings();
+  return CURRENCY_SYMBOLS[settings.currency] || CURRENCY_SYMBOLS.GBP;
+}
+
+function formatCurrency(amount) {
+  return `${getCurrencySymbol()}${amount.toFixed(2)}`;
+}
+
+function formatDuration(totalSeconds) {
+  const seconds = Math.max(0, Math.floor(totalSeconds));
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${pad(hours)}:${pad(minutes)}:${pad(secs)}`;
+}
+
+function formatDate(timestamp) {
+  const d = new Date(timestamp);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : str;
+  return div.innerHTML;
+}
+
+// ---------------------------------------------------------------------------
+// Process calculations
+// ---------------------------------------------------------------------------
+
+// Elapsed seconds for a process instance, including time since it was last
+// started if it's currently running.
+function getInstanceElapsedSeconds(instance) {
+  let elapsed = instance.accumulatedSeconds || 0;
+  if (instance.status === 'running' && instance.lastStart) {
+    elapsed += (Date.now() - instance.lastStart) / 1000;
+  }
+  return elapsed;
+}
+
+// Effective hourly rate for an Hourly process: its own rate if set,
+// otherwise the global default rate.
+function getEffectiveRate(instance) {
+  if (typeof instance.rate === 'number' && !isNaN(instance.rate)) {
+    return instance.rate;
+  }
+  return loadSettings().rate;
+}
+
+// Cost contributed by a single process instance.
+// Flat: the flat cost IS the cost — time does not affect it.
+// Hourly: cost = time x effective rate.
+function getInstanceCost(instance) {
+  if (instance.type === 'flat') {
+    return instance.cost || 0;
+  }
+  const elapsedHours = getInstanceElapsedSeconds(instance) / 3600;
+  return elapsedHours * getEffectiveRate(instance);
+}
+
+// Total cost of a job = sum of all its process instance costs.
+function getJobTotalCost(job) {
+  return job.processes.reduce((sum, instance) => sum + getInstanceCost(instance), 0);
+}
+
+// Total time of a job = sum of all its process instances' elapsed time.
+function getJobTotalSeconds(job) {
+  return job.processes.reduce((sum, instance) => sum + getInstanceElapsedSeconds(instance), 0);
+}
+
+// Returns the value used for ranking/sorting/distribution — elapsed
+// seconds in Time mode, cost in Cost mode — based on the global Display
+// Mode setting. Used by getProcessRankColors, getJobValueDistribution,
+// and the process list sort order, so the "biggest" process (and the
+// rank colours / distribution bar / list order) reflect whichever
+// metric the user has chosen to view.
+function getInstanceMetric(instance) {
+  return loadSettings().displayMode === 'cost' ? getInstanceCost(instance) : getInstanceElapsedSeconds(instance);
+}
+
+function getJobTotalMetric(job) {
+  return job.processes.reduce((sum, instance) => sum + getInstanceMetric(instance), 0);
+}
+
+// Builds the (up to 4) segments for the time-distribution bar:
+// the 3 processes with the most elapsed time, each in its own colour,
+// plus a single "Other" segment combining everything else (neutral grey).
+// Each segment is { color, percent }. Returns [] if the job has no
+// processes; returns a single neutral 100% segment if total time is 0.
+// Maps each process instance ID to a colour based on its current rank by
+// the active metric (elapsed time or cost, per the Display Mode setting)
+// within the job: the process with the highest value gets RANK_COLORS[0]
+// (blue), the second-highest gets RANK_COLORS[1] (green), the third gets
+// RANK_COLORS[2] (amber). All other processes (rank 4+) get the neutral
+// "Other" grey. This is recomputed any time values change or the Display
+// Mode changes — colours are not fixed to a process.
+function getProcessRankColors(job) {
+  const sorted = [...job.processes].sort(
+    (a, b) => getInstanceMetric(b) - getInstanceMetric(a)
+  );
+
+  const colors = {};
+  sorted.forEach((instance, index) => {
+    colors[instance.id] = index < RANK_COLORS.length ? RANK_COLORS[index] : OTHER_SEGMENT_COLOR;
+  });
+  return colors;
+}
+
+function getJobTimeDistribution(job) {
+  const totalMetric = getJobTotalMetric(job);
+
+  if (job.processes.length === 0) {
+    return [];
+  }
+
+  if (totalMetric <= 0) {
+    return [{ color: OTHER_SEGMENT_COLOR, percent: 100 }];
+  }
+
+  const sorted = [...job.processes].sort(
+    (a, b) => getInstanceMetric(b) - getInstanceMetric(a)
+  );
+
+  const top = sorted.slice(0, 3);
+  const rest = sorted.slice(3);
+
+  const segments = top.map((instance, index) => ({
+    color: RANK_COLORS[index],
+    percent: (getInstanceMetric(instance) / totalMetric) * 100,
+  }));
+
+  if (rest.length > 0) {
+    const otherMetric = rest.reduce((sum, instance) => sum + getInstanceMetric(instance), 0);
+    segments.push({
+      color: OTHER_SEGMENT_COLOR,
+      percent: (otherMetric / totalMetric) * 100,
+    });
+  }
+
+  return segments;
+}
+
+// ---------------------------------------------------------------------------
+// App state
+// ---------------------------------------------------------------------------
+
+let currentJobId = null;
+
+// ---------------------------------------------------------------------------
+// Rendering: Dashboard (Screen 1)
+// ---------------------------------------------------------------------------
+
+// Renders the segment <div>s for the time-distribution bar (used both for
+// the initial render and for live updates).
+function renderTimeDistributionSegments(job) {
+  return getJobTimeDistribution(job)
+    .map(
+      (segment) =>
+        `<div class="time-distribution-segment" style="width: ${segment.percent}%; background-color: ${segment.color};"></div>`
+    )
+    .join('');
+}
+
+// Static, non-interactive bar showing how a job's total time is divided
+// across its processes. Sits beneath all other content on a job card.
+function renderTimeDistributionBar(job) {
+  return `<div class="time-distribution-bar" data-distribution-bar="${job.id}">${renderTimeDistributionSegments(job)}</div>`;
+}
+
+// Updates the small "Showing: Time" / "Showing: Cost" indicator in the
+// Dashboard header card to reflect the current global Display Mode.
+// Updates a clock/currency icon pair to reflect the current global
+// Display Mode (Time shows a clock, Cost shows the active currency
+// symbol). Used for both the Dashboard header indicator and the
+// Process page display-mode toggle button.
+function updateDisplayModeIcons(containerId, timeIconId, costIconId) {
+  const container = document.getElementById(containerId);
+  const timeIcon = document.getElementById(timeIconId);
+  const costIcon = document.getElementById(costIconId);
+  if (!container || !timeIcon || !costIcon) return;
+
+  const settings = loadSettings();
+  const isCost = settings.displayMode === 'cost';
+  timeIcon.classList.toggle('is-active', !isCost);
+  costIcon.classList.toggle('is-active', isCost);
+  costIcon.textContent = getCurrencySymbol();
+  container.setAttribute('aria-label', isCost ? 'Showing cost' : 'Showing time');
+}
+
+// Updates the small clock/currency icon in the Dashboard header card and
+// the Process page display-mode toggle button to reflect the current
+// global Display Mode.
+function updateDisplayModeLabel() {
+  updateDisplayModeIcons('display-mode-label', 'display-mode-icon-time', 'display-mode-icon-cost');
+  updateDisplayModeIcons('job-display-mode-toggle', 'job-display-mode-icon-time', 'job-display-mode-icon-cost');
+}
+
+// Persists the global Display Mode and refreshes every part of the UI
+// that depends on it: the Dashboard indicator and job cards
+// (sort/colours/distribution bar), and the open Job Detail page
+// (process list sort/colours, toggle button icon) if any.
+function setDisplayMode(mode) {
+  const settings = loadSettings();
+  settings.displayMode = mode === 'cost' ? 'cost' : 'time';
+  saveSettings(settings);
+
+  updateDisplayModeLabel();
+  renderDashboard();
+  if (currentJobId) renderJobDetail(true);
+}
+
+function renderDashboard() {
+  const jobs = loadJobs();
+  const countLabel = document.getElementById('job-count-label');
+  const content = document.getElementById('dashboard-content');
+
+  countLabel.textContent = `${jobs.length} job${jobs.length === 1 ? '' : 's'}`;
+  updateDisplayModeLabel();
+
+  if (jobs.length === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-text">
+          No jobs yet. Tap "Add job" to create your first job.
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  content.innerHTML = jobs
+    .map((job) => {
+      const totalSeconds = getJobTotalSeconds(job);
+      const totalCost = getJobTotalCost(job);
+
+      return `
+        <div class="card card-tappable" data-job-id="${job.id}" data-open-job="${job.id}">
+          <div class="card-title">${escapeHtml(job.name)}</div>
+          <div class="card-fields-row">
+            <div class="card-field">
+              <span class="card-field-label">Time: </span>
+              <span class="card-field-value" data-dashboard-time="${job.id}">${formatDuration(totalSeconds)}</span>
+            </div>
+            <div class="card-field">
+              <span class="card-field-label">Total: </span>
+              <span class="card-field-value" data-dashboard-cost="${job.id}">${formatCurrency(totalCost)}</span>
+            </div>
+          </div>
+          ${renderTimeDistributionBar(job)}
+        </div>
+      `;
+    })
+    .join('');
+}
+
+// Lightweight live update of dashboard totals without a full re-render.
+function updateDashboardLive() {
+  const page = document.getElementById('page-dashboard');
+  if (!page.classList.contains('active')) return;
+
+  const jobs = loadJobs();
+  jobs.forEach((job) => {
+    const timeEl = document.querySelector(`[data-dashboard-time="${job.id}"]`);
+    if (timeEl) timeEl.textContent = formatDuration(getJobTotalSeconds(job));
+
+    const costEl = document.querySelector(`[data-dashboard-cost="${job.id}"]`);
+    if (costEl) costEl.textContent = formatCurrency(getJobTotalCost(job));
+
+    const barEl = document.querySelector(`[data-distribution-bar="${job.id}"]`);
+    if (barEl) barEl.innerHTML = renderTimeDistributionSegments(job);
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Rendering: Completed Jobs
+// ---------------------------------------------------------------------------
+
+function renderCompletedJobs() {
+  const archived = loadArchivedJobs();
+  const content = document.getElementById('completed-jobs-content');
+
+  if (archived.length === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-text">
+          No completed jobs yet. Archived jobs will appear here.
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const sorted = [...archived].sort((a, b) => b.archivedAt - a.archivedAt);
+
+  content.innerHTML = sorted
+    .map((job) => {
+      return `
+        <div class="card" data-archived-job-id="${job.id}">
+          <div class="card-title">${escapeHtml(job.name)}</div>
+          <div class="card-meta">Completed: ${formatDate(job.archivedAt)}</div>
+          <div class="card-actions">
+            <button class="btn btn-outline" data-respawn-job="${job.id}">Respawn job</button>
+            <button class="btn btn-danger" data-delete-job="${job.id}">Delete job</button>
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+}
+
+// ---------------------------------------------------------------------------
+// Rendering: Job Detail (Screen 2)
+// ---------------------------------------------------------------------------
+
+// Disables (or re-enables) the inline job-name editor based on whether
+// any of the job's processes are currently running. Also cancels an
+// in-progress edit if a timer starts while editing (shouldn't normally
+// happen since starting a timer requires clicking elsewhere first, but
+// this keeps state consistent).
+function updateJobTitleEditState(job) {
+  const titleEl = document.getElementById('job-detail-title');
+  const titleInput = document.getElementById('job-detail-title-input');
+  if (!titleEl || !titleInput) return;
+
+  const hasRunning = job.processes.some((instance) => instance.status === 'running');
+  titleEl.classList.toggle('is-disabled', hasRunning);
+
+  if (hasRunning && titleInput.classList.contains('is-active')) {
+    titleInput.classList.remove('is-active');
+    titleEl.style.display = '';
+  }
+}
+
+function renderJobDetail(sortTriggered = false) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === currentJobId);
+  if (!job) return;
+
+  const titleEl = document.getElementById('job-detail-title');
+  const titleInput = document.getElementById('job-detail-title-input');
+
+  // Don't clobber the title while the user is actively editing it.
+  if (!titleInput.classList.contains('is-active')) {
+    titleEl.textContent = job.name;
+  }
+  updateJobTitleEditState(job);
+
+  const notesField = document.getElementById('job-notes');
+  if (document.activeElement !== notesField) {
+    notesField.value = job.notes || '';
+  }
+
+  renderProcessInstanceList(job, sortTriggered);
+  updateJobTotal(job);
+}
+
+function renderProcessInstanceList(job, sortTriggered = false) {
+  const content = document.getElementById('process-instance-list');
+
+  if (job.processes.length === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-text">
+          No processes added yet. Tap "Add process" to start tracking work on this job.
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // FLIP step 1 ("First"): record each existing card's position before
+  // the list is re-rendered, so any card that moves can be animated from
+  // its old spot to its new one.
+  const previousPositions = {};
+  content.querySelectorAll('.process-color-card').forEach((card) => {
+    const id = card.dataset.instanceId;
+    if (id) previousPositions[id] = card.getBoundingClientRect().top;
+  });
+
+  const rankColors = getProcessRankColors(job);
+
+  const sortedForDisplay = [...job.processes].sort(
+    (a, b) => getInstanceMetric(b) - getInstanceMetric(a)
+  );
+
+  content.innerHTML = sortedForDisplay
+    .map((instance) => {
+      const elapsed = getInstanceElapsedSeconds(instance);
+      const cost = getInstanceCost(instance);
+      const isRunning = instance.status === 'running';
+      const color = rankColors[instance.id];
+
+      const toggleIcon = isRunning
+        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+             <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+           </svg>`
+        : `<svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+             <polygon points="6 4 20 12 6 20 6 4"></polygon>
+           </svg>`;
+
+      const toggleLabel = isRunning ? 'STOP' : 'START';
+      const toggleClass = isRunning ? 'is-running' : 'is-stopped';
+
+      let typeLabel;
+      let rateLabel;
+      let rateValue;
+      if (instance.type === 'flat') {
+        typeLabel = 'Flat';
+        rateLabel = 'Flat cost: ';
+        rateValue = formatCurrency(instance.cost);
+      } else {
+        typeLabel = 'Hourly';
+        rateLabel = 'Rate: ';
+        rateValue = `${formatCurrency(getEffectiveRate(instance))}/hr`;
+      }
+
+      return `
+        <div class="card card-tappable process-color-card" data-instance-id="${instance.id}" data-open-instance="${instance.id}" style="border-left-color: ${color};">
+          <div class="process-card-deadzone" data-deadzone></div>
+          <div class="process-card-header">
+            <div class="process-instance-name-group">
+              <span class="process-color-swatch" style="background-color: ${color};"></span>
+              <span class="process-instance-name">${escapeHtml(instance.name)}</span>
+            </div>
+            <button class="process-toggle-btn ${toggleClass}" data-toggle-instance="${instance.id}">
+              ${toggleIcon}
+              ${toggleLabel}
+            </button>
+          </div>
+          <div class="card-fields-row">
+            <div class="card-field card-field-time">
+              <span class="card-field-label">Time: </span>
+              <span class="card-field-value process-instance-timer" data-instance-timer="${instance.id}" data-raw-seconds="${elapsed}">${formatDuration(elapsed)}</span>
+              <button class="time-edit-btn ${isRunning ? 'is-disabled' : ''}" data-edit-time="${instance.id}" type="button" aria-label="Edit time" ${isRunning ? 'disabled' : ''}>Edit</button>
+              <span class="time-edit-inputs" data-time-edit-inputs="${instance.id}">
+                <input type="number" inputmode="numeric" class="time-edit-input" data-time-edit-minutes="${instance.id}" min="0" max="9999" value="${Math.floor(elapsed / 60)}" />
+                <span class="time-edit-unit">m</span>
+                <input type="number" inputmode="numeric" class="time-edit-input" data-time-edit-seconds="${instance.id}" min="0" max="59" value="${Math.floor(elapsed % 60)}" />
+                <span class="time-edit-unit">s</span>
+              </span>
+            </div>
+            <div class="card-field">
+              <span class="card-field-label">Cost: </span>
+              <span class="card-field-value process-instance-cost" data-instance-cost="${instance.id}">${formatCurrency(cost)}</span>
+            </div>
+          </div>
+          <div class="card-fields-row">
+            <div class="card-field">
+              <span class="card-field-label">Type: </span>
+              <span class="card-field-value">${typeLabel}</span>
+            </div>
+            <div class="card-field">
+              <span class="card-field-label">${rateLabel}</span>
+              <span class="card-field-value">${rateValue}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+
+  // FLIP steps 2-4 ("Last", "Invert", "Play"): for any card whose
+  // top position changed, jump it back to its old position instantly
+  // (no transition), then on the next frame transition it to its new
+  // (natural) position with a slight slide + fade. Cards that didn't
+  // move are left untouched.
+  if (Object.keys(previousPositions).length > 0) {
+    const cards = content.querySelectorAll('.process-color-card');
+    const toAnimate = [];
+
+    cards.forEach((card) => {
+      const id = card.dataset.instanceId;
+      const previousTop = previousPositions[id];
+      if (previousTop === undefined) return;
+
+      const newTop = card.getBoundingClientRect().top;
+      const delta = previousTop - newTop;
+      if (Math.abs(delta) < 1) return;
+
+      card.style.transition = 'none';
+      card.style.transform = `translateY(${delta}px)`;
+      card.style.opacity = '0.85';
+      toAnimate.push(card);
+    });
+
+    if (toAnimate.length > 0) {
+      const reorderClass = sortTriggered ? 'is-reordering-sort' : 'is-reordering';
+      const cleanupDelay = sortTriggered ? 280 : 200;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          toAnimate.forEach((card) => {
+            card.style.transition = '';
+            card.classList.add(reorderClass);
+            card.style.transform = '';
+            card.style.opacity = '';
+          });
+        });
+      });
+
+      // Clean up the helper class once the transition finishes so it
+      // doesn't linger on cards for future unrelated style changes.
+      setTimeout(() => {
+        toAnimate.forEach((card) => card.classList.remove(reorderClass));
+      }, cleanupDelay);
+    }
+  }
+}
+
+function updateJobTotal(job) {
+  const totalEl = document.getElementById('job-total-value');
+  totalEl.textContent = formatCurrency(getJobTotalCost(job));
+}
+
+// Lightweight live update of running timers/costs without a full re-render
+// (so the notes textarea never loses focus while typing).
+function updateJobDetailLive() {
+  const page = document.getElementById('page-job-detail');
+  if (!page.classList.contains('active') || !currentJobId) return;
+
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === currentJobId);
+  if (!job) return;
+
+  const hasRunning = job.processes.some((instance) => instance.status === 'running');
+  if (!hasRunning) return;
+
+  // Skip this render cycle if the user is actively editing a process's
+  // time - a full re-render would destroy the open input. The next tick
+  // will pick up any changes once editing finishes.
+  if (document.querySelector('#process-instance-list .card-field-time.is-editing')) {
+    return;
+  }
+
+  // Re-render the process list so both the live timer/cost values and the
+  // rank-based colours (which can change as elapsed times shift) stay
+  // correct. This only touches #process-instance-list, so the notes
+  // textarea is never affected.
+  renderProcessInstanceList(job);
+  updateJobTotal(job);
+}
+
+// ---------------------------------------------------------------------------
+// Rendering: Settings (utility panel)
+// ---------------------------------------------------------------------------
+
+function renderSettings() {
+  const settings = loadSettings();
+  document.getElementById('global-currency').value = settings.currency;
+  document.getElementById('global-rate').value = settings.rate === 0 ? '' : settings.rate;
+  document.getElementById('global-rate-symbol').textContent = getCurrencySymbol();
+}
+
+// Keeps the currency symbols shown in the Add/Edit process modals in sync
+// with the global currency setting.
+function updateProcessFormCurrencySymbols() {
+  const symbol = getCurrencySymbol();
+  ['new-process-currency-symbol', 'new-process-cost-currency-symbol', 'edit-process-currency-symbol', 'edit-process-cost-currency-symbol'].forEach(
+    (id) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = symbol;
+    }
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Job actions
+// ---------------------------------------------------------------------------
+
+function addJob(name) {
+  const jobs = loadJobs();
+  jobs.push({
+    id: generateId('job'),
+    name: name,
+    createdAt: Date.now(),
+    notes: '',
+    processes: [],
+  });
+  saveJobs(jobs);
+  renderDashboard();
+}
+
+// Archiving: moves a job out of the active list and into Completed Jobs.
+// This is reversible — nothing is deleted.
+function archiveJob(jobId) {
+  const jobs = loadJobs();
+  const index = jobs.findIndex((j) => j.id === jobId);
+  if (index === -1) return;
+
+  const job = jobs[index];
+  job.archivedAt = Date.now();
+
+  jobs.splice(index, 1);
+  saveJobs(jobs);
+
+  const archived = loadArchivedJobs();
+  archived.push(job);
+  saveArchivedJobs(archived);
+
+  if (currentJobId === jobId) {
+    currentJobId = null;
+  }
+
+  renderDashboard();
+}
+
+// Respawn: restores an archived job back into the active list, exactly as
+// it was — all processes, times, costs, and notes are preserved.
+function respawnJob(jobId) {
+  const archived = loadArchivedJobs();
+  const index = archived.findIndex((j) => j.id === jobId);
+  if (index === -1) return;
+
+  const job = archived[index];
+  delete job.archivedAt;
+
+  archived.splice(index, 1);
+  saveArchivedJobs(archived);
+
+  const jobs = loadJobs();
+  jobs.push(job);
+  saveJobs(jobs);
+
+  renderDashboard();
+  renderCompletedJobs();
+}
+
+// Permanently deletes a job from Completed Jobs. Only available there.
+function deleteArchivedJob(jobId) {
+  let archived = loadArchivedJobs();
+  archived = archived.filter((j) => j.id !== jobId);
+  saveArchivedJobs(archived);
+
+  renderCompletedJobs();
+}
+
+function updateJobName(jobId, name) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  const trimmed = typeof name === 'string' ? name.trim() : '';
+  job.name = trimmed === '' ? job.name : trimmed;
+  saveJobs(jobs);
+  return job.name;
+}
+
+function updateJobNotes(jobId, notes) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  job.notes = notes;
+  saveJobs(jobs);
+}
+
+// Creates a new process directly inside a job — no library, no templates.
+function addProcessToJob(jobId, { name, type, rate, cost }) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  job.processes.push({
+    id: generateId('instance'),
+    name: name,
+    type: type,
+    rate: type === 'hourly' ? rate : null,
+    cost: type === 'flat' ? cost : 0,
+    accumulatedSeconds: 0,
+    status: 'stopped',
+    lastStart: null,
+  });
+
+  saveJobs(jobs);
+
+  renderProcessInstanceList(job);
+  updateJobTotal(job);
+}
+
+function toggleProcessInstance(jobId, instanceId) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  const instance = job.processes.find((p) => p.id === instanceId);
+  if (!instance) return;
+
+  if (instance.status === 'running') {
+    instance.accumulatedSeconds = getInstanceElapsedSeconds(instance);
+    instance.lastStart = null;
+    instance.status = 'stopped';
+  } else {
+    // Only one timer may run at a time — stop any other running timer
+    // (in this job or any other) before starting this one.
+    jobs.forEach((otherJob) => {
+      otherJob.processes.forEach((otherInstance) => {
+        if (otherInstance.status === 'running' && otherInstance.id !== instance.id) {
+          otherInstance.accumulatedSeconds = getInstanceElapsedSeconds(otherInstance);
+          otherInstance.lastStart = null;
+          otherInstance.status = 'stopped';
+        }
+      });
+    });
+
+    instance.lastStart = Date.now();
+    instance.status = 'running';
+  }
+
+  saveJobs(jobs);
+  renderProcessInstanceList(job);
+  updateJobTotal(job);
+  updateJobTitleEditState(job);
+}
+
+// Updates a process's name, type, and rate/cost (used by the Edit process modal).
+function updateProcessInstance(jobId, instanceId, { name, type, rate, cost }) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  const instance = job.processes.find((p) => p.id === instanceId);
+  if (!instance) return;
+
+  instance.name = name;
+  instance.type = type;
+  instance.rate = type === 'hourly' ? rate : null;
+  instance.cost = type === 'flat' ? cost : 0;
+
+  saveJobs(jobs);
+  renderProcessInstanceList(job);
+  updateJobTotal(job);
+}
+
+// Manually sets a stopped process instance's accumulated time (in
+// seconds). Returns whether the value actually changed, so callers can
+// decide whether a reorder animation should play.
+function setInstanceElapsedSeconds(jobId, instanceId, totalSeconds) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return { changed: false };
+
+  const instance = job.processes.find((p) => p.id === instanceId);
+  if (!instance) return { changed: false };
+
+  // Manual editing is only for stopped processes - never touch a
+  // running timer's accumulated value here.
+  if (instance.status === 'running') return { changed: false };
+
+  const clamped = Math.max(0, Math.floor(totalSeconds));
+  const changed = clamped !== Math.floor(instance.accumulatedSeconds || 0);
+  instance.accumulatedSeconds = clamped;
+
+  saveJobs(jobs);
+  return { changed, job };
+}
+
+// ---------------------------------------------------------------------------
+// Navigation
+// ---------------------------------------------------------------------------
+
+function switchPage(pageName) {
+  document.querySelectorAll('.page').forEach((page) => {
+    page.classList.toggle('active', page.id === `page-${pageName}`);
+  });
+  document.querySelectorAll('.nav-item').forEach((item) => {
+    item.classList.toggle('active', item.dataset.page === pageName);
+  });
+
+  if (pageName === 'dashboard') {
+    renderDashboard();
+  } else if (pageName === 'settings') {
+    renderSettings();
+  } else if (pageName === 'completed-jobs') {
+    renderCompletedJobs();
+  }
+}
+
+function openJob(jobId) {
+  currentJobId = jobId;
+  document.querySelectorAll('.page').forEach((page) => {
+    page.classList.toggle('active', page.id === 'page-job-detail');
+  });
+  document.querySelectorAll('.nav-item').forEach((item) => item.classList.remove('active'));
+  renderJobDetail();
+}
+
+function backToDashboard() {
+  currentJobId = null;
+  switchPage('dashboard');
+}
+
+// ---------------------------------------------------------------------------
+// Modals
+// ---------------------------------------------------------------------------
+
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+// Sets which type (Hourly/Flat) is active in a type-toggle, and shows the
+// matching rate or cost field group.
+function setProcessFormType(toggleId, rateGroupId, costGroupId, type) {
+  const toggle = document.getElementById(toggleId);
+  toggle.querySelectorAll('.type-toggle-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.type === type);
+  });
+
+  const rateGroup = document.getElementById(rateGroupId);
+  const costGroup = document.getElementById(costGroupId);
+  if (type === 'flat') {
+    rateGroup.style.display = 'none';
+    costGroup.style.display = '';
+  } else {
+    rateGroup.style.display = '';
+    costGroup.style.display = 'none';
+  }
+}
+
+function getProcessFormType(toggleId) {
+  const active = document.querySelector(`#${toggleId} .type-toggle-btn.active`);
+  return active ? active.dataset.type : 'hourly';
+}
+
+// Opens the Edit process modal pre-filled with an existing process's
+// name, type, and rate/cost.
+function openEditProcessModal(jobId, instanceId) {
+  const jobs = loadJobs();
+  const job = jobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  const instance = job.processes.find((p) => p.id === instanceId);
+  if (!instance) return;
+
+  document.getElementById('edit-process-id').value = instance.id;
+  document.getElementById('edit-process-name').value = instance.name;
+  document.getElementById('edit-process-rate').value =
+    typeof instance.rate === 'number' && !isNaN(instance.rate) ? instance.rate : '';
+  document.getElementById('edit-process-cost').value = instance.type === 'flat' ? instance.cost : '';
+  setProcessFormType('edit-process-type-toggle', 'edit-process-rate-group', 'edit-process-cost-group', instance.type);
+  updateProcessFormCurrencySymbols();
+  openModal('edit-process-overlay');
+}
+
+// ---------------------------------------------------------------------------
+// App initialization
+// ---------------------------------------------------------------------------
+
+function initApp() {
+  // Initial render
+  renderDashboard();
+  renderCompletedJobs();
+
+  // Bottom nav
+  document.querySelectorAll('.nav-item').forEach((item) => {
+    item.addEventListener('click', () => switchPage(item.dataset.page));
+  });
+
+  // Back button (Job Detail -> Dashboard)
+  document.getElementById('back-to-dashboard').addEventListener('click', backToDashboard);
+
+  // ---- Add job ----
+  document.getElementById('open-add-job').addEventListener('click', () => {
+    document.getElementById('new-job-name').value = '';
+    openModal('add-job-overlay');
+    document.getElementById('new-job-name').focus();
+  });
+
+  function handleAddJob(e) {
+    e.preventDefault();
+    const input = document.getElementById('new-job-name');
+    const name = input.value.trim();
+    if (!name) {
+      input.focus();
+      return;
+    }
+    addJob(name);
+    closeModal('add-job-overlay');
+  }
+
+  document.getElementById('add-job-form').addEventListener('submit', handleAddJob);
+  document.getElementById('add-job-submit').addEventListener('click', handleAddJob);
+
+  // ---- Dashboard: tap card to open job (delegated) ----
+  document.getElementById('dashboard-content').addEventListener('click', (e) => {
+    const card = e.target.closest('[data-open-job]');
+    if (card) {
+      openJob(card.dataset.openJob);
+    }
+  });
+
+  // ---- Completed Jobs: Respawn / Delete (delegated) ----
+  let pendingDeleteJobId = null;
+
+  document.getElementById('completed-jobs-content').addEventListener('click', (e) => {
+    const respawnBtn = e.target.closest('[data-respawn-job]');
+    if (respawnBtn) {
+      respawnJob(respawnBtn.dataset.respawnJob);
+      switchPage('dashboard');
+      return;
+    }
+
+    const deleteBtn = e.target.closest('[data-delete-job]');
+    if (deleteBtn) {
+      pendingDeleteJobId = deleteBtn.dataset.deleteJob;
+      openModal('delete-confirm-overlay');
+    }
+  });
+
+  document.getElementById('confirm-delete-job').addEventListener('click', () => {
+    if (pendingDeleteJobId) {
+      deleteArchivedJob(pendingDeleteJobId);
+      pendingDeleteJobId = null;
+    }
+    closeModal('delete-confirm-overlay');
+  });
+
+  // ---- Job Detail: notes ----
+  const notesField = document.getElementById('job-notes');
+  notesField.addEventListener('input', () => {
+    if (currentJobId) {
+      updateJobNotes(currentJobId, notesField.value);
+    }
+  });
+
+  // ---- Job Detail: tap-to-edit job name ----
+  // Replaces the title with an inline input in the same position, same
+  // font/size/weight/alignment, no modal/popup/layout shift. Disabled
+  // while any process timer is running.
+  const jobTitleEl = document.getElementById('job-detail-title');
+  const jobTitleInput = document.getElementById('job-detail-title-input');
+
+  function startEditingJobName() {
+    if (!currentJobId) return;
+    if (jobTitleEl.classList.contains('is-disabled')) return;
+    if (jobTitleInput.classList.contains('is-active')) return;
+
+    jobTitleInput.value = jobTitleEl.textContent;
+    jobTitleEl.style.display = 'none';
+    jobTitleInput.classList.add('is-active');
+    jobTitleInput.focus();
+    jobTitleInput.select();
+  }
+
+  function commitJobNameEdit() {
+    if (!jobTitleInput.classList.contains('is-active')) return;
+    if (!currentJobId) return;
+
+    const newName = updateJobName(currentJobId, jobTitleInput.value);
+    jobTitleEl.textContent = newName;
+    jobTitleInput.classList.remove('is-active');
+    jobTitleEl.style.display = '';
+
+    renderDashboard();
+  }
+
+  function cancelJobNameEdit() {
+    if (!jobTitleInput.classList.contains('is-active')) return;
+    jobTitleInput.classList.remove('is-active');
+    jobTitleEl.style.display = '';
+  }
+
+  jobTitleEl.addEventListener('click', startEditingJobName);
+
+  jobTitleInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      commitJobNameEdit();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      cancelJobNameEdit();
+    }
+  });
+
+  jobTitleInput.addEventListener('blur', commitJobNameEdit);
+
+  // ---- Job Detail: manual time edit (per process card) ----
+  // Replaces the Time value with inline minute/second inputs in the same
+  // row - card height never changes. Disabled while that process's timer
+  // is running. A reorder animation only plays if the value changes.
+  function startEditingTime(instanceId) {
+    const fieldEl = document.querySelector(`[data-time-edit-inputs="${instanceId}"]`)?.closest('.card-field-time');
+    if (!fieldEl) return;
+    if (fieldEl.classList.contains('is-editing')) return;
+
+    const minutesInput = fieldEl.querySelector(`[data-time-edit-minutes="${instanceId}"]`);
+    const secondsInput = fieldEl.querySelector(`[data-time-edit-seconds="${instanceId}"]`);
+    const inputsWrap = fieldEl.querySelector(`[data-time-edit-inputs="${instanceId}"]`);
+
+    fieldEl.classList.add('is-editing');
+    inputsWrap.classList.add('is-active');
+    minutesInput.focus();
+    minutesInput.select();
+  }
+
+  function commitTimeEdit(instanceId) {
+    const fieldEl = document.querySelector(`[data-time-edit-inputs="${instanceId}"]`)?.closest('.card-field-time');
+    if (!fieldEl || !fieldEl.classList.contains('is-editing')) return;
+    if (!currentJobId) return;
+
+    const minutesInput = fieldEl.querySelector(`[data-time-edit-minutes="${instanceId}"]`);
+    const secondsInput = fieldEl.querySelector(`[data-time-edit-seconds="${instanceId}"]`);
+
+    const minutes = Math.max(0, parseInt(minutesInput.value, 10) || 0);
+    const seconds = Math.max(0, Math.min(59, parseInt(secondsInput.value, 10) || 0));
+    const totalSeconds = minutes * 60 + seconds;
+
+    const result = setInstanceElapsedSeconds(currentJobId, instanceId, totalSeconds);
+
+    fieldEl.classList.remove('is-editing');
+    fieldEl.querySelector('.time-edit-inputs').classList.remove('is-active');
+
+    if (result.job) {
+      // Only animate a reorder if the value actually changed.
+      renderProcessInstanceList(result.job, result.changed);
+      updateJobTotal(result.job);
+      renderDashboard();
+    }
+  }
+
+  function cancelTimeEdit(instanceId) {
+    const fieldEl = document.querySelector(`[data-time-edit-inputs="${instanceId}"]`)?.closest('.card-field-time');
+    if (!fieldEl || !fieldEl.classList.contains('is-editing')) return;
+
+    const elapsed = parseFloat(fieldEl.querySelector('.process-instance-timer').dataset.rawSeconds || '0');
+    const minutesInput = fieldEl.querySelector(`[data-time-edit-minutes="${instanceId}"]`);
+    const secondsInput = fieldEl.querySelector(`[data-time-edit-seconds="${instanceId}"]`);
+    minutesInput.value = Math.floor(elapsed / 60);
+    secondsInput.value = Math.floor(elapsed % 60);
+
+    fieldEl.classList.remove('is-editing');
+    fieldEl.querySelector('.time-edit-inputs').classList.remove('is-active');
+  }
+
+  document.getElementById('process-instance-list').addEventListener('click', (e) => {
+    if (e.target.closest('[data-deadzone]')) {
+      return;
+    }
+
+    const editBtn = e.target.closest('[data-edit-time]');
+    if (editBtn) {
+      if (editBtn.disabled) return;
+      startEditingTime(editBtn.dataset.editTime);
+      return;
+    }
+
+    const toggleBtn = e.target.closest('[data-toggle-instance]');
+    if (toggleBtn && currentJobId) {
+      toggleProcessInstance(currentJobId, toggleBtn.dataset.toggleInstance);
+      return;
+    }
+
+    const card = e.target.closest('[data-open-instance]');
+    if (card && currentJobId) {
+      // Don't open the edit-process modal if the tap was inside an
+      // active time-edit input.
+      if (e.target.closest('.time-edit-inputs')) return;
+      openEditProcessModal(currentJobId, card.dataset.openInstance);
+    }
+  });
+
+  document.getElementById('process-instance-list').addEventListener('keydown', (e) => {
+    const input = e.target.closest('[data-time-edit-minutes], [data-time-edit-seconds]');
+    if (!input) return;
+
+    const instanceId = input.dataset.timeEditMinutes || input.dataset.timeEditSeconds;
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      commitTimeEdit(instanceId);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      cancelTimeEdit(instanceId);
+    }
+  });
+
+  document.getElementById('process-instance-list').addEventListener('focusout', (e) => {
+    const input = e.target.closest('[data-time-edit-minutes], [data-time-edit-seconds]');
+    if (!input) return;
+
+    const instanceId = input.dataset.timeEditMinutes || input.dataset.timeEditSeconds;
+    const fieldEl = input.closest('.card-field-time');
+
+    // If focus is moving to the other input in the same pair, don't
+    // commit yet - wait until focus leaves both.
+    setTimeout(() => {
+      if (!fieldEl.contains(document.activeElement)) {
+        commitTimeEdit(instanceId);
+      }
+    }, 0);
+  });
+
+
+  // ---- Job Detail: archive job (with confirmation) ----
+  document.getElementById('open-archive-job').addEventListener('click', () => {
+    if (currentJobId) {
+      openModal('archive-confirm-overlay');
+    }
+  });
+
+  document.getElementById('confirm-archive-job').addEventListener('click', () => {
+    if (currentJobId) {
+      const jobId = currentJobId;
+      archiveJob(jobId);
+      closeModal('archive-confirm-overlay');
+      renderCompletedJobs();
+      switchPage('completed-jobs');
+    }
+  });
+
+  // ---- Job Detail: add process (created directly, no library) ----
+  document.getElementById('open-add-process').addEventListener('click', () => {
+    document.getElementById('new-process-name').value = '';
+    document.getElementById('new-process-rate').value = '';
+    document.getElementById('new-process-cost').value = '';
+    setProcessFormType('new-process-type-toggle', 'new-process-rate-group', 'new-process-cost-group', 'hourly');
+    updateProcessFormCurrencySymbols();
+    openModal('add-process-overlay');
+    document.getElementById('new-process-name').focus();
+  });
+
+  document.getElementById('new-process-type-toggle').querySelectorAll('.type-toggle-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setProcessFormType('new-process-type-toggle', 'new-process-rate-group', 'new-process-cost-group', btn.dataset.type);
+    });
+  });
+
+  function handleAddProcess(e) {
+    e.preventDefault();
+    if (!currentJobId) return;
+
+    const nameInput = document.getElementById('new-process-name');
+    const rateInput = document.getElementById('new-process-rate');
+    const costInput = document.getElementById('new-process-cost');
+
+    const name = nameInput.value.trim();
+    if (!name) {
+      nameInput.focus();
+      return;
+    }
+
+    const type = getProcessFormType('new-process-type-toggle');
+
+    if (type === 'flat') {
+      const rawCost = costInput.value.trim();
+      const costValue = parseFloat(rawCost);
+      if (rawCost === '' || isNaN(costValue) || costValue < 0) {
+        costInput.focus();
+        return;
+      }
+      addProcessToJob(currentJobId, { name: name, type: 'flat', rate: null, cost: costValue });
+    } else {
+      const rawRate = rateInput.value.trim();
+      let rateValue = null;
+      if (rawRate !== '') {
+        const parsed = parseFloat(rawRate);
+        if (isNaN(parsed) || parsed < 0) {
+          rateInput.focus();
+          return;
+        }
+        rateValue = parsed;
+      }
+      addProcessToJob(currentJobId, { name: name, type: 'hourly', rate: rateValue, cost: 0 });
+    }
+
+    closeModal('add-process-overlay');
+  }
+
+  document.getElementById('add-process-form').addEventListener('submit', handleAddProcess);
+  document.getElementById('add-process-submit').addEventListener('click', handleAddProcess);
+
+  document.getElementById('edit-process-type-toggle').querySelectorAll('.type-toggle-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setProcessFormType('edit-process-type-toggle', 'edit-process-rate-group', 'edit-process-cost-group', btn.dataset.type);
+    });
+  });
+
+  // ---- Job Detail: save edits to an existing process ----
+  function handleEditProcess(e) {
+    e.preventDefault();
+    if (!currentJobId) return;
+
+    const idInput = document.getElementById('edit-process-id');
+    const nameInput = document.getElementById('edit-process-name');
+    const rateInput = document.getElementById('edit-process-rate');
+    const costInput = document.getElementById('edit-process-cost');
+
+    const instanceId = idInput.value;
+    if (!instanceId) return;
+
+    const name = nameInput.value.trim();
+    if (!name) {
+      nameInput.focus();
+      return;
+    }
+
+    const type = getProcessFormType('edit-process-type-toggle');
+
+    if (type === 'flat') {
+      const rawCost = costInput.value.trim();
+      const costValue = parseFloat(rawCost);
+      if (rawCost === '' || isNaN(costValue) || costValue < 0) {
+        costInput.focus();
+        return;
+      }
+      updateProcessInstance(currentJobId, instanceId, { name: name, type: 'flat', rate: null, cost: costValue });
+    } else {
+      const rawRate = rateInput.value.trim();
+      let rateValue = null;
+      if (rawRate !== '') {
+        const parsed = parseFloat(rawRate);
+        if (isNaN(parsed) || parsed < 0) {
+          rateInput.focus();
+          return;
+        }
+        rateValue = parsed;
+      }
+      updateProcessInstance(currentJobId, instanceId, { name: name, type: 'hourly', rate: rateValue, cost: 0 });
+    }
+
+    closeModal('edit-process-overlay');
+  }
+
+  document.getElementById('edit-process-form').addEventListener('submit', handleEditProcess);
+  document.getElementById('edit-process-submit').addEventListener('click', handleEditProcess);
+
+  // ---- Modal close buttons (shared) ----
+  document.querySelectorAll('[data-close-modal]').forEach((btn) => {
+    btn.addEventListener('click', () => closeModal(btn.dataset.closeModal));
+  });
+
+  document.querySelectorAll('.modal-overlay').forEach((overlay) => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+      }
+    });
+  });
+
+  // ---- Settings ----
+  document.getElementById('global-currency').addEventListener('change', (e) => {
+    const settings = loadSettings();
+    settings.currency = CURRENCY_SYMBOLS[e.target.value] ? e.target.value : DEFAULT_SETTINGS.currency;
+    saveSettings(settings);
+
+    renderSettings();
+    renderDashboard();
+    updateProcessFormCurrencySymbols();
+    if (currentJobId) renderJobDetail();
+  });
+
+  document.getElementById('global-rate').addEventListener('change', (e) => {
+    const settings = loadSettings();
+    const raw = e.target.value.trim();
+    const value = parseFloat(raw);
+    settings.rate = raw === '' || isNaN(value) || value < 0 ? 0 : value;
+    saveSettings(settings);
+
+    renderDashboard();
+    if (currentJobId) renderJobDetail();
+  });
+
+  document.getElementById('job-display-mode-toggle').addEventListener('click', () => {
+    const current = loadSettings().displayMode;
+    setDisplayMode(current === 'cost' ? 'time' : 'cost');
+  });
+
+  // ---- Live updates: timers, costs, totals ----
+  setInterval(() => {
+    updateDashboardLive();
+    updateJobDetailLive();
+  }, 1000);
+
+  // ---- Service worker registration: not applicable in single-file build ----
+}
+
+// Run initApp() once the DOM is ready.
+function safeInit() {
+  try { initApp(); } catch(e) {}
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', safeInit);
+} else {
+  safeInit();
+}
+
+</script>
+</body>
+</html>
