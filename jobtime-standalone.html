@@ -839,7 +839,6 @@ html, body {
   position: relative;
   display: flex;
   align-items: stretch;
-  gap: var(--space-3);
   border-left: 4px solid;
   padding-left: calc(var(--space-4) - 4px);
 }
@@ -851,6 +850,15 @@ html, body {
   flex-direction: column;
   justify-content: center;
   gap: var(--space-2);
+}
+
+/* Dead zone: a buffer strip between the left content (name, Time, Cost,
+   Type, Rate) and the tall Start/Stop button. Taps here are absorbed and
+   do nothing - they don't open the Edit Process modal and don't toggle
+   the timer. Purely a tap buffer; no visual change, no effect on layout. */
+.process-card-deadzone {
+  flex-shrink: 0;
+  width: var(--space-4);
 }
 
 /* Non-interactive buffer zone around each card's outer perimeter.
@@ -2129,6 +2137,7 @@ function renderProcessInstanceList(job, sortTriggered = false) {
               </div>
             </div>
           </div>
+          <div class="process-card-deadzone" data-deadzone></div>
           <button class="process-toggle-btn-tall ${toggleClass}" data-toggle-instance="${instance.id}">
             ${toggleIcon}
             ${toggleLabel}
