@@ -743,105 +743,46 @@ html, body {
   font-weight: 500;
 }
 
-/* Manual time edit: a small "Edit" button sits next to the Time value.
-   On tap, the value+button are hidden and replaced with inline
-   minute/second inputs in the same row — card height never changes. */
 .card-field-time {
   display: flex;
   align-items: baseline;
   gap: 4px;
 }
 
-.time-edit-btn {
-  flex-shrink: 0;
-  display: inline-flex;
+/* Edit-process modal: hours/minutes time input row */
+.time-input-row {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-family);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--color-text-secondary);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 6px 12px;
-  margin-left: 4px;
-  min-height: 32px;
-  min-width: 44px;
-  cursor: pointer;
-  line-height: 1.4;
+  gap: var(--space-2);
 }
 
-.time-edit-btn:hover {
-  color: var(--color-text);
-  border-color: var(--color-text-secondary);
-}
-
-.time-edit-btn.is-disabled {
-  opacity: 0.4;
-  cursor: default;
-  pointer-events: none;
-}
-
-.time-edit-inputs {
-  display: none;
-  align-items: center;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.time-edit-inputs.is-active {
-  display: inline-flex;
-}
-
-.time-edit-done-btn {
-  flex-shrink: 0;
-  font-family: var(--font-family);
-  font-size: 12px;
-  font-weight: 600;
-  color: #fff;
-  background-color: var(--color-accent);
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 6px 14px;
-  margin-left: 4px;
-  min-height: 32px;
-  cursor: pointer;
-}
-
-/* When editing, hide the static value + Edit button so the inputs take
-   their place without changing the row's height or layout. */
-.card-field-time.is-editing .process-instance-timer,
-.card-field-time.is-editing .time-edit-btn {
-  display: none;
-}
-
-.time-edit-input {
-  width: 2.8em;
-  min-height: 32px;
-  font-family: var(--font-family);
-  font-size: var(--font-ui);
-  font-weight: 600;
-  color: var(--color-text);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-sm);
-  padding: 0 4px;
+.time-input-row .form-input {
+  width: 4.5em;
   text-align: center;
   -moz-appearance: textfield;
 }
 
-.time-edit-input::-webkit-outer-spin-button,
-.time-edit-input::-webkit-inner-spin-button {
+.time-input-row .form-input::-webkit-outer-spin-button,
+.time-input-row .form-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.time-edit-unit {
+.time-input-unit {
   font-size: var(--font-body);
   color: var(--color-text-secondary);
   font-weight: 500;
+}
+
+.form-group.is-disabled .time-input-row .form-input {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.form-hint {
+  margin-top: var(--space-2);
+  font-size: 12px;
+  color: var(--color-text-secondary);
 }
 
 /* Time-distribution bar — a static summary of how a job's total time is
@@ -1499,6 +1440,16 @@ html, body {
           <div class="type-toggle" id="edit-process-type-toggle">
             <button type="button" class="type-toggle-btn active" data-type="hourly">Hourly</button>
             <button type="button" class="type-toggle-btn" data-type="flat">Flat</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Time</label>
+          <div class="time-input-row">
+            <input class="form-input" type="number" inputmode="numeric" id="edit-process-time-hours" min="0" max="999" />
+            <span class="time-input-unit">h</span>
+            <input class="form-input" type="number" inputmode="numeric" id="edit-process-time-minutes" min="0" max="59" />
+            <span class="time-input-unit">m</span>
           </div>
         </div>
 
@@ -2178,14 +2129,6 @@ function renderProcessInstanceList(job, sortTriggered = false) {
             <div class="card-field card-field-time">
               <span class="card-field-label">Time: </span>
               <span class="card-field-value process-instance-timer" data-instance-timer="${instance.id}" data-raw-seconds="${elapsed}">${formatDuration(elapsed)}</span>
-              <button class="time-edit-btn ${isRunning ? 'is-disabled' : ''}" data-edit-time="${instance.id}" type="button" aria-label="Edit time" ${isRunning ? 'disabled' : ''}>Edit</button>
-              <span class="time-edit-inputs" data-time-edit-inputs="${instance.id}">
-                <input type="number" inputmode="numeric" class="time-edit-input" data-time-edit-minutes="${instance.id}" min="0" max="9999" value="${Math.floor(elapsed / 60)}" />
-                <span class="time-edit-unit">m</span>
-                <input type="number" inputmode="numeric" class="time-edit-input" data-time-edit-seconds="${instance.id}" min="0" max="59" value="${Math.floor(elapsed % 60)}" />
-                <span class="time-edit-unit">s</span>
-                <button class="time-edit-done-btn" data-time-edit-done="${instance.id}" type="button" aria-label="Save time">Done</button>
-              </span>
             </div>
             <div class="card-field">
               <span class="card-field-label">Cost: </span>
@@ -2590,6 +2533,30 @@ function openEditProcessModal(jobId, instanceId) {
   document.getElementById('edit-process-cost').value = instance.type === 'flat' ? instance.cost : '';
   setProcessFormType('edit-process-type-toggle', 'edit-process-rate-group', 'edit-process-cost-group', instance.type);
   updateProcessFormCurrencySymbols();
+
+  const elapsed = getInstanceElapsedSeconds(instance);
+  const hoursInput = document.getElementById('edit-process-time-hours');
+  const minutesInput = document.getElementById('edit-process-time-minutes');
+  hoursInput.value = Math.floor(elapsed / 3600);
+  minutesInput.value = Math.floor((elapsed % 3600) / 60);
+
+  const isRunning = instance.status === 'running';
+  hoursInput.disabled = isRunning;
+  minutesInput.disabled = isRunning;
+  const timeGroup = hoursInput.closest('.form-group');
+  timeGroup.classList.toggle('is-disabled', isRunning);
+  let timeHint = timeGroup.querySelector('.form-hint');
+  if (isRunning) {
+    if (!timeHint) {
+      timeHint = document.createElement('div');
+      timeHint.className = 'form-hint';
+      timeGroup.appendChild(timeHint);
+    }
+    timeHint.textContent = 'Stop this process to edit its time.';
+  } else if (timeHint) {
+    timeHint.remove();
+  }
+
   openModal('edit-process-overlay');
 }
 
@@ -2725,79 +2692,9 @@ function initApp() {
 
   jobTitleInput.addEventListener('blur', commitJobNameEdit);
 
-  // ---- Job Detail: manual time edit (per process card) ----
-  // Replaces the Time value with inline minute/second inputs in the same
-  // row - card height never changes. Disabled while that process's timer
-  // is running. A reorder animation only plays if the value changes.
-  function startEditingTime(instanceId) {
-    const fieldEl = document.querySelector(`[data-time-edit-inputs="${instanceId}"]`)?.closest('.card-field-time');
-    if (!fieldEl) return;
-    if (fieldEl.classList.contains('is-editing')) return;
-
-    const minutesInput = fieldEl.querySelector(`[data-time-edit-minutes="${instanceId}"]`);
-    const secondsInput = fieldEl.querySelector(`[data-time-edit-seconds="${instanceId}"]`);
-    const inputsWrap = fieldEl.querySelector(`[data-time-edit-inputs="${instanceId}"]`);
-
-    fieldEl.classList.add('is-editing');
-    inputsWrap.classList.add('is-active');
-    minutesInput.focus();
-    minutesInput.select();
-  }
-
-  function commitTimeEdit(instanceId) {
-    const fieldEl = document.querySelector(`[data-time-edit-inputs="${instanceId}"]`)?.closest('.card-field-time');
-    if (!fieldEl || !fieldEl.classList.contains('is-editing')) return;
-    if (!currentJobId) return;
-
-    const minutesInput = fieldEl.querySelector(`[data-time-edit-minutes="${instanceId}"]`);
-    const secondsInput = fieldEl.querySelector(`[data-time-edit-seconds="${instanceId}"]`);
-
-    const minutes = Math.max(0, parseInt(minutesInput.value, 10) || 0);
-    const seconds = Math.max(0, Math.min(59, parseInt(secondsInput.value, 10) || 0));
-    const totalSeconds = minutes * 60 + seconds;
-
-    const result = setInstanceElapsedSeconds(currentJobId, instanceId, totalSeconds);
-
-    fieldEl.classList.remove('is-editing');
-    fieldEl.querySelector('.time-edit-inputs').classList.remove('is-active');
-
-    if (result.job) {
-      // Only animate a reorder if the value actually changed.
-      renderProcessInstanceList(result.job, result.changed);
-      updateJobTotal(result.job);
-      renderDashboard();
-    }
-  }
-
-  function cancelTimeEdit(instanceId) {
-    const fieldEl = document.querySelector(`[data-time-edit-inputs="${instanceId}"]`)?.closest('.card-field-time');
-    if (!fieldEl || !fieldEl.classList.contains('is-editing')) return;
-
-    const elapsed = parseFloat(fieldEl.querySelector('.process-instance-timer').dataset.rawSeconds || '0');
-    const minutesInput = fieldEl.querySelector(`[data-time-edit-minutes="${instanceId}"]`);
-    const secondsInput = fieldEl.querySelector(`[data-time-edit-seconds="${instanceId}"]`);
-    minutesInput.value = Math.floor(elapsed / 60);
-    secondsInput.value = Math.floor(elapsed % 60);
-
-    fieldEl.classList.remove('is-editing');
-    fieldEl.querySelector('.time-edit-inputs').classList.remove('is-active');
-  }
-
+  // ---- Job Detail: process card interactions (toggle timer / open edit modal) ----
   document.getElementById('process-instance-list').addEventListener('click', (e) => {
     if (e.target.closest('[data-deadzone]')) {
-      return;
-    }
-
-    const editBtn = e.target.closest('[data-edit-time]');
-    if (editBtn) {
-      if (editBtn.disabled) return;
-      startEditingTime(editBtn.dataset.editTime);
-      return;
-    }
-
-    const doneBtn = e.target.closest('[data-time-edit-done]');
-    if (doneBtn) {
-      commitTimeEdit(doneBtn.dataset.timeEditDone);
       return;
     }
 
@@ -2809,41 +2706,8 @@ function initApp() {
 
     const card = e.target.closest('[data-open-instance]');
     if (card && currentJobId) {
-      // Don't open the edit-process modal if the tap was inside an
-      // active time-edit input.
-      if (e.target.closest('.time-edit-inputs')) return;
       openEditProcessModal(currentJobId, card.dataset.openInstance);
     }
-  });
-
-  document.getElementById('process-instance-list').addEventListener('keydown', (e) => {
-    const input = e.target.closest('[data-time-edit-minutes], [data-time-edit-seconds]');
-    if (!input) return;
-
-    const instanceId = input.dataset.timeEditMinutes || input.dataset.timeEditSeconds;
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      commitTimeEdit(instanceId);
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
-      cancelTimeEdit(instanceId);
-    }
-  });
-
-  document.getElementById('process-instance-list').addEventListener('focusout', (e) => {
-    const input = e.target.closest('[data-time-edit-minutes], [data-time-edit-seconds]');
-    if (!input) return;
-
-    const instanceId = input.dataset.timeEditMinutes || input.dataset.timeEditSeconds;
-    const fieldEl = input.closest('.card-field-time');
-
-    // If focus is moving to the other input in the same pair, don't
-    // commit yet - wait until focus leaves both.
-    setTimeout(() => {
-      if (!fieldEl.contains(document.activeElement)) {
-        commitTimeEdit(instanceId);
-      }
-    }, 0);
   });
 
 
@@ -2974,7 +2838,24 @@ function initApp() {
       updateProcessInstance(currentJobId, instanceId, { name: name, type: 'hourly', rate: rateValue, cost: 0 });
     }
 
+    // ---- Time (hours/minutes), if the field isn't disabled (i.e. process isn't running) ----
+    const hoursInput = document.getElementById('edit-process-time-hours');
+    const minutesInput = document.getElementById('edit-process-time-minutes');
+    let timeResult = { changed: false };
+    if (!hoursInput.disabled) {
+      const hours = Math.max(0, parseInt(hoursInput.value, 10) || 0);
+      const minutes = Math.max(0, Math.min(59, parseInt(minutesInput.value, 10) || 0));
+      const totalSeconds = hours * 3600 + minutes * 60;
+      timeResult = setInstanceElapsedSeconds(currentJobId, instanceId, totalSeconds);
+    }
+
     closeModal('edit-process-overlay');
+
+    if (timeResult.job) {
+      renderProcessInstanceList(timeResult.job, timeResult.changed);
+      updateJobTotal(timeResult.job);
+      renderDashboard();
+    }
   }
 
   document.getElementById('edit-process-form').addEventListener('submit', handleEditProcess);
