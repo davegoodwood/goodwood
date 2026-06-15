@@ -754,16 +754,21 @@ html, body {
 
 .time-edit-btn {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-family);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--color-text-secondary);
-  background-color: transparent;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: 1px 6px;
-  margin-left: 2px;
+  padding: 6px 12px;
+  margin-left: 4px;
+  min-height: 32px;
+  min-width: 44px;
   cursor: pointer;
   line-height: 1.4;
 }
@@ -781,12 +786,28 @@ html, body {
 
 .time-edit-inputs {
   display: none;
-  align-items: baseline;
-  gap: 2px;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
 .time-edit-inputs.is-active {
   display: inline-flex;
+}
+
+.time-edit-done-btn {
+  flex-shrink: 0;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  margin-left: 4px;
+  min-height: 32px;
+  cursor: pointer;
 }
 
 /* When editing, hide the static value + Edit button so the inputs take
@@ -797,7 +818,8 @@ html, body {
 }
 
 .time-edit-input {
-  width: 2.5em;
+  width: 2.8em;
+  min-height: 32px;
   font-family: var(--font-family);
   font-size: var(--font-ui);
   font-weight: 600;
@@ -805,7 +827,7 @@ html, body {
   background-color: var(--color-surface);
   border: 1px solid var(--color-accent);
   border-radius: var(--radius-sm);
-  padding: 0 2px;
+  padding: 0 4px;
   text-align: center;
   -moz-appearance: textfield;
 }
@@ -2162,6 +2184,7 @@ function renderProcessInstanceList(job, sortTriggered = false) {
                 <span class="time-edit-unit">m</span>
                 <input type="number" inputmode="numeric" class="time-edit-input" data-time-edit-seconds="${instance.id}" min="0" max="59" value="${Math.floor(elapsed % 60)}" />
                 <span class="time-edit-unit">s</span>
+                <button class="time-edit-done-btn" data-time-edit-done="${instance.id}" type="button" aria-label="Save time">Done</button>
               </span>
             </div>
             <div class="card-field">
@@ -2769,6 +2792,12 @@ function initApp() {
     if (editBtn) {
       if (editBtn.disabled) return;
       startEditingTime(editBtn.dataset.editTime);
+      return;
+    }
+
+    const doneBtn = e.target.closest('[data-time-edit-done]');
+    if (doneBtn) {
+      commitTimeEdit(doneBtn.dataset.timeEditDone);
       return;
     }
 
