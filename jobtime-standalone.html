@@ -624,8 +624,7 @@ html, body {
 
 /* Buttons inside a tappable card are actions, not part of the tap-to-open
    area visually, but clicks on them are still handled before card taps. */
-.card-tappable .card-actions .btn,
-.card-tappable .process-toggle-btn {
+.card-tappable .card-actions .btn {
   cursor: pointer;
 }
 
@@ -831,26 +830,27 @@ html, body {
 
 /* Process cards carry a strong left-edge accent in the process's colour,
    matching the same colour used for that process in the dashboard's
-   time-distribution bar. */
+   time-distribution bar. The card is split into a left area (name, Time,
+   Cost, Type, Rate) that opens the Edit Process modal on tap, and a tall
+   narrow Start/Stop button running almost the full height of the card on
+   the right — a large, unambiguous target that's never part of the Edit
+   tap zone. */
 .process-color-card {
   position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
   border-left: 4px solid;
   padding-left: calc(var(--space-4) - 4px);
 }
 
-/* Dead zone: a vertical strip down the middle of the card, between the
-   left-side content (name, Time, Type) and right-side content
-   (Start/Stop, Cost, Rate). Taps here are absorbed and do nothing -
-   they don't open the Edit Process modal. Purely a tap target; no
-   visual change, no effect on layout or card size. */
-.process-card-deadzone {
-  position: absolute;
-  top: var(--space-3);
-  bottom: var(--space-3);
-  left: 50%;
-  width: var(--space-3);
-  transform: translateX(-50%);
-  z-index: 1;
+.process-card-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
 }
 
 /* Non-interactive buffer zone around each card's outer perimeter.
@@ -912,58 +912,47 @@ html, body {
   min-width: 0;
 }
 
-/* Large, obvious Start/Stop button — never shrunk */
-.process-toggle-btn {
+/* Tall, narrow Start/Stop button running almost the full height of the
+   card on its right edge — a large, unambiguous touch target that sits
+   outside the Edit-process tap zone entirely. */
+.process-toggle-btn-tall {
   flex-shrink: 0;
-  position: relative;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
-  min-width: 110px;
-  min-height: 48px;
-  padding: var(--space-3) var(--space-4);
+  gap: var(--space-1);
+  width: 64px;
+  min-height: 100%;
   border-radius: var(--radius-md);
   border: none;
   font-family: var(--font-family);
   font-weight: 600;
-  font-size: var(--font-ui);
+  font-size: 12px;
   letter-spacing: 0.02em;
   cursor: pointer;
   color: #ffffff;
 }
 
-/* Invisible tap-target padding: extends the clickable area around
-   Start/Stop without changing its visual size or the surrounding
-   layout, reducing accidental mis-taps. */
-.process-toggle-btn::before {
-  content: '';
-  position: absolute;
-  top: -24px;
-  right: -24px;
-  bottom: -24px;
-  left: -24px;
-}
-
-.process-toggle-btn.is-stopped {
+.process-toggle-btn-tall.is-stopped {
   background-color: #22c55e;
 }
 
-.process-toggle-btn.is-stopped:hover {
+.process-toggle-btn-tall.is-stopped:hover {
   background-color: #1ea34e;
 }
 
-.process-toggle-btn.is-running {
+.process-toggle-btn-tall.is-running {
   background-color: var(--color-danger);
 }
 
-.process-toggle-btn.is-running:hover {
+.process-toggle-btn-tall.is-running:hover {
   background-color: #d63d3d;
 }
 
-.process-toggle-btn svg {
-  width: 18px;
-  height: 18px;
+.process-toggle-btn-tall svg {
+  width: 20px;
+  height: 20px;
 }
 
 .process-instance-timer {
@@ -2113,38 +2102,37 @@ function renderProcessInstanceList(job, sortTriggered = false) {
       }
 
       return `
-        <div class="card card-tappable process-color-card" data-instance-id="${instance.id}" data-open-instance="${instance.id}" style="border-left-color: ${color};">
-          <div class="process-card-deadzone" data-deadzone></div>
-          <div class="process-card-header">
+        <div class="card process-color-card" data-instance-id="${instance.id}" style="border-left-color: ${color};">
+          <div class="process-card-left card-tappable" data-open-instance="${instance.id}">
             <div class="process-instance-name-group">
               <span class="process-color-swatch" style="background-color: ${color};"></span>
               <span class="process-instance-name">${escapeHtml(instance.name)}</span>
             </div>
-            <button class="process-toggle-btn ${toggleClass}" data-toggle-instance="${instance.id}">
-              ${toggleIcon}
-              ${toggleLabel}
-            </button>
-          </div>
-          <div class="card-fields-row">
-            <div class="card-field card-field-time">
-              <span class="card-field-label">Time: </span>
-              <span class="card-field-value process-instance-timer" data-instance-timer="${instance.id}" data-raw-seconds="${elapsed}">${formatDuration(elapsed)}</span>
+            <div class="card-fields-row">
+              <div class="card-field card-field-time">
+                <span class="card-field-label">Time: </span>
+                <span class="card-field-value process-instance-timer" data-instance-timer="${instance.id}" data-raw-seconds="${elapsed}">${formatDuration(elapsed)}</span>
+              </div>
+              <div class="card-field">
+                <span class="card-field-label">Cost: </span>
+                <span class="card-field-value process-instance-cost" data-instance-cost="${instance.id}">${formatCurrency(cost)}</span>
+              </div>
             </div>
-            <div class="card-field">
-              <span class="card-field-label">Cost: </span>
-              <span class="card-field-value process-instance-cost" data-instance-cost="${instance.id}">${formatCurrency(cost)}</span>
-            </div>
-          </div>
-          <div class="card-fields-row">
-            <div class="card-field">
-              <span class="card-field-label">Type: </span>
-              <span class="card-field-value">${typeLabel}</span>
-            </div>
-            <div class="card-field">
-              <span class="card-field-label">${rateLabel}</span>
-              <span class="card-field-value">${rateValue}</span>
+            <div class="card-fields-row">
+              <div class="card-field">
+                <span class="card-field-label">Type: </span>
+                <span class="card-field-value">${typeLabel}</span>
+              </div>
+              <div class="card-field">
+                <span class="card-field-label">${rateLabel}</span>
+                <span class="card-field-value">${rateValue}</span>
+              </div>
             </div>
           </div>
+          <button class="process-toggle-btn-tall ${toggleClass}" data-toggle-instance="${instance.id}">
+            ${toggleIcon}
+            ${toggleLabel}
+          </button>
         </div>
       `;
     })
