@@ -2539,6 +2539,9 @@ function openEditProcessModal(jobId, instanceId) {
   const minutesInput = document.getElementById('edit-process-time-minutes');
   hoursInput.value = Math.floor(elapsed / 3600);
   minutesInput.value = Math.floor((elapsed % 3600) / 60);
+  // Store original so submit can detect whether time was actually changed
+  hoursInput.dataset.original = hoursInput.value;
+  minutesInput.dataset.original = minutesInput.value;
 
   const isRunning = instance.status === 'running';
   hoursInput.disabled = isRunning;
@@ -2838,15 +2841,19 @@ function initApp() {
       updateProcessInstance(currentJobId, instanceId, { name: name, type: 'hourly', rate: rateValue, cost: 0 });
     }
 
-    // ---- Time (hours/minutes), if the field isn't disabled (i.e. process isn't running) ----
+    // ---- Time (hours/minutes), only if changed and process isn't running ----
     const hoursInput = document.getElementById('edit-process-time-hours');
     const minutesInput = document.getElementById('edit-process-time-minutes');
     let timeResult = { changed: false };
     if (!hoursInput.disabled) {
       const hours = Math.max(0, parseInt(hoursInput.value, 10) || 0);
       const minutes = Math.max(0, Math.min(59, parseInt(minutesInput.value, 10) || 0));
-      const totalSeconds = hours * 3600 + minutes * 60;
-      timeResult = setInstanceElapsedSeconds(currentJobId, instanceId, totalSeconds);
+      const originalHours = parseInt(hoursInput.dataset.original, 10) || 0;
+      const originalMinutes = parseInt(minutesInput.dataset.original, 10) || 0;
+      if (hours !== originalHours || minutes !== originalMinutes) {
+        const totalSeconds = hours * 3600 + minutes * 60;
+        timeResult = setInstanceElapsedSeconds(currentJobId, instanceId, totalSeconds);
+      }
     }
 
     closeModal('edit-process-overlay');
